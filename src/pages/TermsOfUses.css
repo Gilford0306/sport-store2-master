@@ -1,0 +1,37 @@
+* {
+    font-family: Jura;
+}
+
+.terms-of-uses-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    /* Выровнять элементы по левому краю */
+    justify-content: flex-start;
+    /* Выровнять элементы сверху */
+    height: 100vh;
+    text-align: left;
+    /* Выровнять текст по левому краю */
+    padding: 20px;
+    box-sizing: border-box;
+    background-color: #ffffff;
+    /* Белый фон для контейнера */
+}
+
+
+
+h2 {
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+    color: #000000;
+     margin:  10px 
+    /* Цвет текста заголовка */
+}
+
+p {
+    margin-bottom: 20px;
+    font-size: 1rem;
+    color: #000000;
+   margin: 10px;
+    /* Цвет текста */
+}

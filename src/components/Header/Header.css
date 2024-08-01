@@ -1,0 +1,75 @@
+
+@font-face {
+  font-family: 'Jura';
+  src: local('Jura'), url(../fonts/Jura-VariableFont_wght.ttf) format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+.header {
+
+  font-family: 'Jura';
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0px 20px;
+  background-color: transparent; 
+}
+.logo {
+  margin-right: 25%; /* Логотип смещение */
+}
+
+.logo img {
+  height: 60px;
+}
+
+.navigation {
+  display: flex;
+  gap: 20px;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.nav-link {
+  text-decoration: none;
+  color: #000;
+}
+
+.header-right {
+  margin-left: 5%;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.icons {
+  display: flex;
+  gap: 15px;
+}
+
+.icon {
+  font-size: 20px;
+}
+
+.user-profile {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.user-profile img {
+  border-radius: 50%;
+  height: 30px;
+  width: 30px;
+}
+
+.login-button, .register-button {
+  background-color: rgb(38, 0, 255);
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+.login-button:hover, .register-button:hover {
+  background-color: #ffeb3b;
+}

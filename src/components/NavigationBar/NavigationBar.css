@@ -1,0 +1,22 @@
+.navigation-bar {
+  display: flex;
+  justify-content:space-around;
+  background-color: white;
+  border-radius: 25px;
+  padding: 10px 100px;
+  gap: 100px;
+  align-items: start;
+  padding-left: 110px ;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.navigation-bar a {
+  text-decoration: none;
+  color: black;
+  font-weight: bold;
+}
+
+.navigation-bar a:hover {
+  text-decoration: underline;
+}
+

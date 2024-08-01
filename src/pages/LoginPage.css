@@ -1,0 +1,97 @@
+
+
+@font-face {
+  font-family: 'Inter';
+  src: local('Jura'), url(../components/fonts/Inter-VariableFont_slnt\,wght.ttf) format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+.email-input-container {
+
+font-family: Jura;
+  margin: 40px 0px;
+
+  display: flex;
+  flex-direction: column;
+
+  /* Выровнять элементы по левому краю */
+  justify-content: flex-start;
+  /* Выровнять элементы сверху */
+  text-align: left;
+  /* Выровнять текст по левому краю */
+  padding: 20px;
+  box-sizing: border-box;
+  background-color: #ffffff;
+  /* Белый фон для контейнера */
+  /* padding-left: 10%;
+  padding-right: 35%; */
+}
+
+
+/* Стили для заголовка */
+h2 {
+  
+  margin-bottom: 48px;
+  font-size: 1.5rem;
+  color: #000000;
+  /* Цвет текста заголовка */
+}
+
+/* Стили для поля ввода */
+.email-input {
+ font-family: Jura;
+  width: 100%;
+  max-width: 300px;
+  padding: 10px;
+  margin-bottom: 20px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-left: 0%;
+  margin-right: 33%;
+}
+
+p {
+
+  margin-bottom: 20px;
+  font-size: 0.9rem;
+  color: #000000;
+}
+
+a {
+  color: #007BFF;
+  /* Цвет ссылок */
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+  /* Подчеркивание при наведении */
+}
+
+/* Стили для кнопки */
+.continue-button {
+  padding: 10px 20px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 5px;
+  background-color: #007BFF;
+  /* Фон кнопки */
+  color: white;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-left: 68%;
+}
+
+.continue-button:hover {
+  background-color: #0056b3;
+  /* Цвет кнопки при наведении */
+}
+
+.button-container {
+  width: 100%;
+  display: flex;
+  justify-content:center;
+  margin-left: 15%;
+  /* Выровнять кнопку по правому краю */
+}
