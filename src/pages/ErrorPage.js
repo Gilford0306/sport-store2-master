@@ -17,10 +17,20 @@ const styles = {
     margin: '150px',
   },
   header: {
-    fontSize: '72px',
+    fontFamily: 'Inter',
+    fontSize: '200px',
+    fontWeight: '900',
+    lineheight: '242.05px',
+    textalign: 'center',
   },
   text: {
-    fontSize: '24px',
+    fontfamily: 'Jura',
+    fontsize: '32px',
+    fontweight: '700',
+    lineheight: '37.86px',
+    textalign: 'center',
+
+    
   },
   button: {
     display: 'inline-block',
