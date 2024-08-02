@@ -14,7 +14,7 @@ function ErrorPage() {
 const styles = {
   container: {
     textAlign: 'center',
-    marginTop: '50px',
+    margin: '150px',
   },
   header: {
     fontSize: '72px',
