@@ -31,7 +31,7 @@
   background: yellow;
   border: none;
   padding: 10px 20px;
-  border-radius: 20px;
+  border-radius: 5px;
   cursor: pointer;
 }
 
@@ -111,5 +111,5 @@
   color: white;
   border: none;
   cursor: pointer;
-  border-radius: 5px;
+  border-radius: 50px;
 }
