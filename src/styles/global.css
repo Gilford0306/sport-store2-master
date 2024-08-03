@@ -23,6 +23,13 @@ a {
 a:hover {
   text-decoration: underline;
 }
+
+@font-face {
+  font-family: 'Inter';
+  src: local('Jura'), url(../components/fonts/Inter-VariableFont_slnt\,wght.ttf) format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
 /* 
 button {
   background-color: #007bff;

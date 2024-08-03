@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 
 function LoginPage  ()  {
-  const [email, setUsername] = useState('');
+  const [login, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
@@ -16,7 +16,7 @@ function LoginPage  ()  {
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ email, password })
+      body: JSON.stringify({ login, password })
     });
 
     const data = await response.json();
@@ -35,7 +35,7 @@ function LoginPage  ()  {
         <div className="email-input-container">
          <form onSubmit={handleLogin}>
             <h2>Вкажіть адресу електронної пошти та пароль щоб увійти .</h2>
-            <input type="email" placeholder="Ел. пошта" className="email-input"  id="email" name="email" required value={email} onChange={(e) => setUsername(e.target.value)} />
+            <input type="text" placeholder="Логін" className="email-input"  id="login" name="login" required value={login} onChange={(e) => setUsername(e.target.value)} />
             <input type="password" placeholder="Пароль" className="email-input" id="password" name="password" required value={password} onChange={(e) => setPassword(e.target.value)}/>
             <div className="button-container">
                <button type="submit">Продовжити</button>
