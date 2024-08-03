@@ -21,6 +21,7 @@
 
 .form-group {
   margin-bottom: 15px;
+  margin-left: 20px;
 }
 
 .form-group label {
@@ -33,7 +34,7 @@
 .form-group input[type="text"],
 .form-group input[type="password"],
 .form-group input[type="date"] {
-  width: 100%;
+  width: 175%;
   padding: 10px;
   font-size: 16px;
   border: 1px solid #ccc;
@@ -49,6 +50,7 @@
 /* Чекбоксы */
 .form-group input[type="checkbox"] {
   margin-right: 10px;
+  width: auto;
 }
 
 .form-group.checkbox-group {
