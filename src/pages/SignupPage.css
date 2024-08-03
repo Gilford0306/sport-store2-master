@@ -55,7 +55,7 @@
 
 .form-group.checkbox-group {
   display: flex;
-  align-items: start;
+  max-width: fit-content;
 }
 
 .checkbox-group input[type="checkbox"] {
@@ -66,8 +66,10 @@
 }
 
 .checkbox-group label {
+  min-width: 500px;
   font-size: 16px;
    margin:  0px 15px !important;
+
 }
 
 /* Кнопка */
