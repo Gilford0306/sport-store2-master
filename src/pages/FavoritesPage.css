@@ -1,0 +1,65 @@
+/* FavoritesPage.css */
+.favorites-page {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+}
+
+.favorites-items {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+/* FavoriteItem.css */
+.favorite-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #f8f8f8;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 15px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.item-price {
+  font-size: 1.2rem;
+  color: #333;
+}
+
+/* ProductImage.css */
+.product-image {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+/* ProductDescription.css */
+.product-description {
+  flex: 1;
+  margin-left: 20px;
+}
+
+.product-description h3 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.product-description p {
+  margin-top: 8px;
+  color: #777;
+}
+
+/* IconButton.css */
+.icon-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.icon-heart {
+  color: red;
+  font-size: 1.5rem;
+}

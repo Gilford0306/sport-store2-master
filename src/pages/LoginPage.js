@@ -34,29 +34,30 @@ function LoginPage() {
 
       localStorage.setItem('token', data.token);
       localStorage.setItem('refreshToken', data.refreshToken);
-
-      const profileResponse = await fetch('https://localhost:7000/api/Auth/profile', {
-        method: 'GET',
-        headers: {
-          'Authorization': `Bearer ${data.token}`
-        }
-      });
-
-      // Логируем полный ответ профиля
-      console.log('Profile Response:', profileResponse);
-
-      if (!profileResponse.ok) {
-        const profileErrorData = await profileResponse.json();
-        console.error('Profile fetch error:', profileErrorData);
-        throw new Error(profileErrorData.message || 'Failed to fetch profile');
-      }
-
-      const profileData = await profileResponse.json();
-      // Логируем данные профиля
-      console.log('Profile data:', profileData);
-      localStorage.setItem('userProfile', JSON.stringify(profileData));
       navigate('/');
-    } catch (error) {
+    //   const profileResponse = await fetch('https://localhost:7000/api/Auth/profile', {
+    //     method: 'GET',
+    //     headers: {
+    //       'Authorization': `Bearer ${data.token}`
+    //     }
+    //   });
+
+    //   // Логируем полный ответ профиля
+    //   console.log('Profile Response:', profileResponse);
+
+    //   if (!profileResponse.ok) {
+    //     const profileErrorData = await profileResponse.json();
+    //     console.error('Profile fetch error:', profileErrorData);
+    //     throw new Error(profileErrorData.message || 'Failed to fetch profile');
+    //   }
+
+    //   const profileData = await profileResponse.json();
+    //   // Логируем данные профиля
+    //   console.log('Profile data:', profileData);
+    //   localStorage.setItem('userProfile', JSON.stringify(profileData));
+    //   navigate('/');
+    } 
+    catch (error) {
       console.error('Login failed:', error);
     }
   };

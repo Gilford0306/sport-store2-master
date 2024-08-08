@@ -1,76 +1,29 @@
-/* App.css */
-.App {
-  text-align: center;
-}
-
-.header {
-  display: flex;
-  justify-content: space-between;
-  padding: 10px;
-  background: #f8f8f8;
-}
-
-.logo {
-  font-size: 24px;
-  font-weight: bold;
-  color: blue;
-}
-
-.navigation a {
-  margin: 0 15px;
-  text-decoration: none;
-  color: black;
-}
-
-.user-menu {
-  display: flex;
-  align-items: center;
-}
-
-.profile-button {
-  background: yellow;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.home-page {
-  padding: 50px;
-}
-
-.home-page .profile-button {
-  background: blue;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  cursor: pointer;
-  border-radius: 5px;
-}
-
 .profile-form {
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
-  padding: 20px;
-  margin: 200px 350px;
-
+  height: 50vh;  /* Takes up the full height of the viewport */
+  gap: 50px;      /* Space between the columns */
 }
 
 .form-left,
-.form-right,
+.form-right {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;      /* Space between input fields */
+}
+
 .form-center {
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 
 .form-group {
-  margin-bottom: 15px;
-  width: 300px;
+  width: 250px;   /* Adjust width of input fields */
 }
 
 .form-group label {
-  display: block;
   margin-bottom: 5px;
 }
 
@@ -78,13 +31,6 @@
   width: 100%;
   padding: 10px;
   box-sizing: border-box;
-}
-
-.photo-upload {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-bottom: 15px;
 }
 
 .photo-upload img {
@@ -100,9 +46,9 @@
 }
 
 .form-save {
-  display: flex;
-  justify-content: center;
-  margin-top: 20px;
+  position: relative; 
+  right: -20px;  /* Adjust this value as needed */
+  top: 20px;     /* Adjust this value as needed */
 }
 
 .save-button {

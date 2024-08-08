@@ -1,30 +1,33 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;400;700;900&display=swap');
 
-.buttons{
-  margin: 0px;
+/* Основные стили */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background: #FFFFFF;
 }
 
 .header-image-container {
-  margin-top: -100px; /* Задает отступ, чтобы избежать перекрытия хедером */
   position: relative;
   width: 100%;
   height: auto;
-  z-index: -1;
   margin-bottom: 200px;
 }
 
 .cyclist-image {
   width: 100%;
-  height: 50%;
+  height: auto; /* Оставить изображение пропорциональным */
 }
 
 .text-overlay {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, 0%);
+  transform: translate(-50%, -50%);
   color: white;
   text-align: center;
+  z-index: 2;
 }
 
 .text-overlay h1 {
@@ -32,62 +35,103 @@
   font-size: 36px;
   font-weight: 700;
   line-height: 42.59px;
-  text-align: center;
   color: #000000;
 }
 
 .text-overlay p {
   font-size: 1.2em;
   margin: 10px 0 0;
-  font-family: 'Jura', sans-serif;
+  font-family: 'Inter', sans-serif;
   font-size: 14px;
   font-weight: 400;
   line-height: 16.56px;
-  text-align: center;
   color: #000000;
 }
 
-.magtop1 {
+.magtop1, .magtop2, .magtop3 {
   position: absolute;
   height: 400px;
   width: 400px;
   top: 70%;
-  left: 20%;
   transform: translate(-50%, 0%);
+}
+
+.magtop1 {
+  left: 20%;
 }
 
 .magtop2 {
-  position: absolute;
-  height: 400px;
-  width: 400px;
-  top: 70%;
   left: 50%;
-  transform: translate(-50%, 0%);
 }
 
 .magtop3 {
-  position: absolute;
-  height: 400px;
-  width: 400px;
-  top: 70%;
   left: 80%;
-  transform: translate(-50%, 0%);
 }
 
-.header-content {
-  position: absolute;
-  top: 68px;
-  left: 27%;
-  display: flex;
-  align-items: center; /* Выравнивание по вертикали */
-  justify-content: center; /* Выравнивание по горизонтали */
+.middle-section {
+  background-color: #28292D;
+  color: white;
+  text-align: center;
+  padding: 40px 20px;
 }
 
-.buttons-container {
-  padding-left: 10px;
+.middle-section h2 {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  font-size: 120px;
+  font-weight: 900;
+  line-height: 154.91px;
+  color:  #FFFFFF;
+}
+
+.middle-section p {
+  margin: 10px 0 30px;
+  font-family: 'Inter', sans-serif;
+  font-size: 64px;
+  font-weight: 100;
+  line-height: 77.45px;
+  color:  #FFFFFF;
+}
+
+.images-container {
   display: flex;
-  gap: 23px;
-  /* Отступ слева от навбара */
+  justify-content: center;
+  gap: 20px;
+}
+
+.image-box {
+  text-align: center;
+}
+
+.image-box img {
+  width: 488px;
+  height: 700px;
+  border-radius: 10px;
+}
+
+.image-box p {
+  position: relative;
+  top: -150px;
+  left: 50px;
+  font-family: 'Inter', sans-serif;
+  font-size: 32px;
+  font-weight: 700;
+  color: #FFFFFF;
+}
+
+.shop-button-middle {
+  background-color: #007bff;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 12px;
+  cursor: pointer;
+  position: relative;
+  width: 138px;
+  height: 30px;
+  top: -150px;
+  left: -130px;
 }
 
 .hit-prodagy {
@@ -122,112 +166,9 @@
   border: none;
   color: white;
   padding: 10px 20px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
   font-size: 16px;
-  margin: 4px 2px;
   border-radius: 12px;
   cursor: pointer;
-}
-
-.middle-section {
-  background-color: #28292D;
-  color: white;
-  text-align: center;
-  padding: 40px 20px;
-}
-
-.middle-section h2 {
-  margin: 0;
-  font-family: 'Inter', sans-serif;
-  font-size: 120px;
-  font-weight: 900;
-  line-height: 154.91px;
-  text-align: center;
-  color:  #FFFFFF;
-
-}
-
-.middle-section p {
-  margin: 10px 0 30px;
-  font-family: 'Inter', sans-serif;
-  font-size: 64px;
-  font-weight: 100;
-  line-height: 77.45px;
-  text-align: center;
-  color:  #FFFFFF;
-}
-
-.images-container {
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-}
-
-.image-box {
-  text-align: center;
-}
-
-.image-box img {
-  width: 488px;
-  height: 700px;
-  border-radius: 10px;
-}
-
-.image-box p {
-  position: relative; /* Абсолютное позиционирование */
-  top: -150px; /* Отступ сверху */
-  left: 50px; /* Отступ слева */
-  font-family: 'Inter', sans-serif;
-  font-size: 32px;
-  font-weight: 700;
-  line-height: 38.73px;
-  text-align: left;
-  color: #FFFFFF;
-}
-
-#image-button1 {
-  position: relative;
-  width: 138px;
-  height: 27px;
-  top: -150px; /* Отступ сверху */
-  left: -130px; /* Отступ слева */
-}
-
-#image-button2 {
-  position: relative;
-  width: 138px;
-  height: 27px;
-  top: -150px; /* Отступ сверху */
-  left: -130px; /* Отступ слева */
-}
-
-#image-button3 {
-  position: relative;
-  width: 138px;
-  height: 27px;
-  top: -150px; /* Отступ сверху */
-  left: -130px; /* Отступ слева */
-}
-
-.shop-button-middle {
-  background-color: #007bff;
-  border: none;
-  color: white;
-  padding: 10px 20px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
-  border-radius: 12px;
-  cursor: pointer;
-  position: relative;
-  width: 138px;
-  height: 30px;
-  top: -150px; /* Отступ сверху */
-  left: -130px; /* Отступ слева */
 }
 
 .product-list {

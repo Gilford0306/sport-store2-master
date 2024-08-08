@@ -1,7 +1,6 @@
 import React from 'react';
 import './UserProfilePage.css'
 
-
 function UserProfilePage() {
   return (
     <div className="profile-form">
@@ -37,7 +36,5 @@ function UserProfilePage() {
     </div>
   );
 }
-
-
 
 export default UserProfilePage;

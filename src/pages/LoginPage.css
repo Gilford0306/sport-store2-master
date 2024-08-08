@@ -10,7 +10,7 @@
 
 font-family: Jura;
   margin: 40px 0px;
-
+    margin-top: 100px;
   display: flex;
   flex-direction: column;
 
@@ -30,7 +30,7 @@ font-family: Jura;
 
 /* Стили для заголовка */
 h2 {
-  
+
   margin-bottom: 48px;
   font-size: 1.5rem;
   color: #000000;
@@ -47,7 +47,8 @@ h2 {
   font-size: 1rem;
   border: 1px solid #ccc;
   border-radius: 5px;
-  margin-left: 0%;
+  margin-top: 15px;
+  margin-left: 33%;
   margin-right: 33%;
 }
 

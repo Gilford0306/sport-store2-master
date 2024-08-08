@@ -1,0 +1,12 @@
+.cart-page {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+.cart-items {
+  flex: 3;
+  display: flex;
+  flex-direction: column;
+  margin-right: 20px;
+}

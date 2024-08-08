@@ -3,3 +3,24 @@
   font-family: Arial, sans-serif;
   color: #333;
 }
+
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Обеспечивает высоту на весь экран */
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  flex: 1; /* Занимает всё доступное пространство */
+}
+
+main {
+  flex: 1; /* Занимает всё доступное пространство внутри .App */
+}

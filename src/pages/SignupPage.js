@@ -11,28 +11,28 @@ function SignupPage() {
         <h1>Тепер давай зареєструємо тебе у ...</h1>
       </div>
       <form className="registration-form">
-        <div className="form-group">
+        <div className="form-group-sing ">
           <label htmlFor="email">Email*</label>
           <input type="text" id="email" name="email" required />
         </div>
-        <div className="form-group">
+        <div className="form-group-sing ">
           <label htmlFor="login">Login*</label>
           <input type="text" id="login" name="login" required />
         </div>
-        <div className="form-group">
+        <div className="form-group-sing ">
           <label htmlFor="firstName">Ім'я*</label>
           <input type="text" id="firstName" name="firstName" required />
         </div>
-        <div className="form-group">
+        <div className="form-group-sing ">
           <label htmlFor="lastName">Прізвище*</label>
           <input type="text" id="lastName" name="lastName" required />
         </div>
-        <div className="form-group">
+        <div className="form-group-sing ">
           <label htmlFor="password">Пароль*</label>
           <input type="password" id="password" name="password" required />
           <span className="helper-text">Мінімум символів: 8</span>
         </div>
-        <div className="form-group">
+        <div className="form-group-sing ">
           <label htmlFor="birthdate">Дата народження*</label>
           <input type="date" id="birthdate" name="birthdate" required />
         </div>

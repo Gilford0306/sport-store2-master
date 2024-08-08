@@ -1,21 +1,34 @@
-
 @font-face {
   font-family: 'Jura';
   src: local('Jura'), url(../fonts/Jura-VariableFont_wght.ttf) format('truetype');
   font-weight: normal;
   font-style: normal;
 }
-.header {
 
+.header {
   font-family: 'Jura';
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0px 20px;
-  background-color: transparent; 
+  padding: 0 20px;
+  background-color: transparent;
+  margin: 0 auto; /* Центрирование хедера */
+  max-width: 1920px; /* Максимальная ширина хедера */
+  width: 100%; /* Ширина хедера на всю доступную ширину */
+  box-sizing: border-box; /* Учет паддингов в ширине */
+  position: relative; /* Для z-index */
+  z-index: 10; /* Убедитесь, что хедер выше других элементов */
 }
+
+.header-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
 .logo {
-  margin-right: 25%; /* Логотип смещение */
+  margin-bottom: 20px; /* Отступ между логотипом и навигацией */
 }
 
 .logo img {
@@ -25,9 +38,6 @@
 .navigation {
   display: flex;
   gap: 20px;
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
 }
 
 .nav-link {
@@ -36,7 +46,6 @@
 }
 
 .header-right {
-  margin-left: 5%;
   display: flex;
   align-items: center;
   gap: 20px;
@@ -49,6 +58,16 @@
 
 .icon {
   font-size: 20px;
+  cursor: pointer; /* Курсор для иконок */
+  transition: transform 0.2s; /* Плавный переход при наведении */
+}
+
+.icon:hover {
+  transform: scale(1.2); /* Увеличение иконки при наведении */
+}
+
+.profile-img {
+  cursor: pointer;
 }
 
 .user-profile {
@@ -72,4 +91,17 @@
 
 .login-button:hover, .register-button:hover {
   background-color: #ffeb3b;
+}
+
+.header-right button {
+  background-color: transparent;
+  border: none;
+  color: #333;
+  font-size: 16px;
+  cursor: pointer;
+  margin-left: 20px;
+}
+
+.header-right button:hover {
+  color: #000;
 }
