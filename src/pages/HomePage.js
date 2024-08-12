@@ -6,7 +6,6 @@ import Header from '../components/Header/Header';
 import NavigationBar from '../components/NavigationBar/NavigationBar'
 import Button from '../components/Button/Button'
 import heroImage from '../components/assets/hero-image-copy.jpg';
-import vectorImage from '../components/assets/Vector 1.png'
 import './HomePage.css'
 import magtop1 from '../components/assets/Frame 80.svg';
 import magtop2 from '../components/assets/Frame 81.svg';

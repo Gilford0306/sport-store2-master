@@ -10,7 +10,7 @@ body {
 
 /* Новый контейнер для контента */
 .wrapper {
-  max-width: 1920px;
+  /* max-width: 1920px; */
   width: 100%;
   background-color: #FFFFFF;
   box-shadow: 0 0 0 0;

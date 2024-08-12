@@ -29,6 +29,7 @@
 
 .logo {
   margin-bottom: 20px; /* Отступ между логотипом и навигацией */
+  margin-right: 100px;
 }
 
 .logo img {

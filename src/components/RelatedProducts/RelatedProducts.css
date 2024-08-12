@@ -1,0 +1,16 @@
+.related-products-item {
+  flex: 1;
+  text-align: center;
+  cursor: pointer; /* Курсор в виде руки при наведении */
+  transition: transform 0.2s ease;
+}
+
+.related-products-item:hover {
+  transform: scale(1.05); /* Легкое увеличение при наведении */
+}
+.related-products-title {
+  text-align: left;
+  margin-left: 0;
+  padding-left: 0;
+  font-size: 1.5rem; /* При необходимости, можно изменить размер шрифта */
+}

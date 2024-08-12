@@ -1,0 +1,92 @@
+/* ProductPage.css */
+.product-page-one {
+  padding: 2rem;
+  display: flex;
+  flex-direction: column; /* Расположение элементов в колонку */
+}
+
+.product-content {
+  display: flex;
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+.product-image-section img {
+  max-width: 100%;
+  border-radius: 8px;
+}
+
+.product-details-section {
+  flex: 1; /* Занимает оставшееся пространство */
+}
+
+.product-size-selector {
+  margin: 1.5rem 0;
+}
+
+.product-actions {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.product-actions button {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.add-to-cart-button {
+  background-color: #4285f4;
+  color: white;
+}
+
+.favorite-button {
+  background-color: #f4b400;
+  color: white;
+}
+
+.product-description {
+  margin-top: 2rem;
+}
+
+/* Стили для секции RelatedProducts */
+.related-products-container {
+  margin-top: 2rem; /* Отступ сверху чтобы отделить от основного содержимого */
+  width: 100%; /* Убедитесь, что контейнер занимает всю ширину */
+}
+
+.related-products {
+  display: flex;
+  flex-direction: column; /* Позиционирование элементов в колонку */
+  gap: 1.5rem;
+}
+
+.related-products-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.related-products-list {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.related-products-item {
+  flex: 1;
+  text-align: center;
+}
+
+.related-products-item img {
+  max-width: 100%;
+  border-radius: 8px;
+}
+
+.related-products-item p {
+  margin-top: 0.5rem;
+  font-size: 1rem;
+  color: #333;
+}
