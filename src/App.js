@@ -20,7 +20,7 @@ import './styles/global.css';
 
 function App() {
   return (
-     <UserProvider>
+  <UserProvider>
     <Router>
       <CartProvider>
         <div className="App">
@@ -46,7 +46,7 @@ function App() {
         </div>
       </CartProvider>
     </Router>
-    </UserProvider>
+  </UserProvider>
   );
 }
 
