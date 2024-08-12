@@ -1,26 +1,25 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import './LoginPage.css';
 import { useNavigate } from 'react-router-dom';
+import { UserContext } from '../components/contexts/UserContext';
 
 function LoginPage() {
-  const [login, setUsername] = useState('');
+  const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
+  const { login: loginContext } = useContext(UserContext);
 
   const handleLogin = async (event) => {
     event.preventDefault();
 
     try {
-      const response = await fetch('https://localhost:7000/api/Auth/login', {
+      const response = await fetch('http://localhost:7000/api/Auth/login', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ username: login, password })
+        body: JSON.stringify({ Username: login, Password: password }),
       });
-
-      // Логируем полный ответ
-      console.log('Response:', response);
 
       if (!response.ok) {
         const errorData = await response.json();
@@ -29,36 +28,31 @@ function LoginPage() {
       }
 
       const data = await response.json();
-      // Логируем данные
-      console.log('Response data:', data);
-
       localStorage.setItem('token', data.token);
       localStorage.setItem('refreshToken', data.refreshToken);
+
+      // Получаем профиль пользователя
+      const profileResponse = await fetch('http://localhost:7000/api/Auth/GetProfile', {
+        method: 'GET',
+        headers: {
+          'Authorization': `Bearer ${data.token}`,
+        },
+      });
+
+      if (!profileResponse.ok) {
+        const errorProfileData = await profileResponse.json();
+        console.error('Failed to fetch profile:', errorProfileData);
+        throw new Error('Failed to fetch profile');
+      }
+
+      const profileData = await profileResponse.json();
+      loginContext(profileData);
+      console.log('UserProfile:', profileData);
       navigate('/');
-    //   const profileResponse = await fetch('https://localhost:7000/api/Auth/profile', {
-    //     method: 'GET',
-    //     headers: {
-    //       'Authorization': `Bearer ${data.token}`
-    //     }
-    //   });
-
-    //   // Логируем полный ответ профиля
-    //   console.log('Profile Response:', profileResponse);
-
-    //   if (!profileResponse.ok) {
-    //     const profileErrorData = await profileResponse.json();
-    //     console.error('Profile fetch error:', profileErrorData);
-    //     throw new Error(profileErrorData.message || 'Failed to fetch profile');
-    //   }
-
-    //   const profileData = await profileResponse.json();
-    //   // Логируем данные профиля
-    //   console.log('Profile data:', profileData);
-    //   localStorage.setItem('userProfile', JSON.stringify(profileData));
-    //   navigate('/');
     } 
     catch (error) {
       console.error('Login failed:', error);
+      // Возможно, показать пользователю сообщение об ошибке
     }
   };
 
@@ -74,7 +68,7 @@ function LoginPage() {
           name="login"
           required
           value={login}
-          onChange={(e) => setUsername(e.target.value)}
+          onChange={(e) => setLogin(e.target.value)}
         />
         <input
           type="password"

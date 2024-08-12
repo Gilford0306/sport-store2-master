@@ -13,12 +13,14 @@ import SignupPage from './pages/SignupPage';
 import ErrorPage from './pages/ErrorPage';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import TermsOfUses from './pages/TermsOfUses';
-import { CartProvider } from './contexts/CartContext';
-import '@fortawesome/fontawesome-free/css/all.min.css';
+import { CartProvider } from './components/contexts/CartContext';
+import { UserProvider } from './components/contexts/UserContext'
+
 import './styles/global.css';
 
 function App() {
   return (
+     <UserProvider>
     <Router>
       <CartProvider>
         <div className="App">
@@ -44,6 +46,7 @@ function App() {
         </div>
       </CartProvider>
     </Router>
+    </UserProvider>
   );
 }
 
