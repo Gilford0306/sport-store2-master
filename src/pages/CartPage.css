@@ -1,12 +1,16 @@
+/* src/pages/CartPage.css */
 .cart-page {
   display: flex;
-  justify-content: space-between;
-  padding: 20px;
 }
 
 .cart-items {
-  flex: 3;
-  display: flex;
-  flex-direction: column;
-  margin-right: 20px;
+  flex: 3; /* 75% от ширины контейнера */
+  padding: 20px;
+  overflow-y: auto; /* Позволяет прокрутку, если элементов больше, чем в видимой области */
+}
+
+.cart-summary {
+  flex: 1; /* 25% от ширины контейнера */
+  padding: 20px;
+  border-left: 1px solid #ddd; /* Разделитель между двумя блоками */
 }

@@ -1,58 +1,65 @@
-import React, { useState, useContext } from 'react';
-import './LoginPage.css';
-import { useNavigate } from 'react-router-dom';
-import { UserContext } from '../components/contexts/UserContext';
+import React, { useState, useContext } from "react";
+import "./LoginPage.css";
+import { useNavigate } from "react-router-dom";
+import { UserContext } from "../components/contexts/UserContext";
+import { useFavorites } from "../components/contexts/FavoritesContext";
 
 function LoginPage() {
-  const [login, setLogin] = useState('');
-  const [password, setPassword] = useState('');
+  const [login, setLogin] = useState("");
+  const [password, setPassword] = useState("");
   const navigate = useNavigate();
   const { login: loginContext } = useContext(UserContext);
+  const { setUser } = useFavorites();
 
   const handleLogin = async (event) => {
     event.preventDefault();
 
     try {
-      const response = await fetch('https://localhost:7000/api/Auth/login', {
-        method: 'POST',
+      const response = await fetch("https://localhost:7000/api/Auth/login", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({ Username: login, Password: password }),
       });
 
       if (!response.ok) {
         const errorData = await response.json();
-        console.error('Login error:', errorData);
-        throw new Error(errorData.message || 'Something went wrong');
+        console.error("Login error:", errorData);
+        throw new Error(errorData.message || "Something went wrong");
       }
 
       const data = await response.json();
-      localStorage.setItem('token', data.token);
-      localStorage.setItem('refreshToken', data.refreshToken);
+      localStorage.setItem("token", data.token);
+      localStorage.setItem("refreshToken", data.refreshToken);
 
       // Получаем профиль пользователя
-      const profileResponse = await fetch('https://localhost:7000/api/Auth/GetProfile', {
-        method: 'GET',
-        headers: {
-          'Authorization': `Bearer ${data.token}`,
-        },
-      });
+      const profileResponse = await fetch(
+        "https://localhost:7000/api/Auth/GetProfile",
+        {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${data.token}`,
+          },
+        }
+      );
 
       if (!profileResponse.ok) {
         const errorProfileData = await profileResponse.json();
-        console.error('Failed to fetch profile:', errorProfileData);
-        throw new Error('Failed to fetch profile');
+        console.error("Failed to fetch profile:", errorProfileData);
+        throw new Error("Failed to fetch profile");
       }
 
       const profileData = await profileResponse.json();
       loginContext(profileData);
-      console.log('UserProfile:', profileData);
-      navigate('/');
-    } 
-    catch (error) {
-      console.error('Login failed:', error);
-      // Возможно, показать пользователю сообщение об ошибке
+
+      // Устанавливаем ID пользователя в контексте избранных товаров
+      setUser(profileData.id);
+      localStorage.setItem("userId", profileData.id);
+
+      navigate("/");
+    } catch (error) {
+      console.error("Login failed:", error);
     }
   };
 

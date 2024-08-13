@@ -1,0 +1,13 @@
+.icon-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.icon-button i {
+  transition: transform 0.2s;
+}
+
+.icon-button:hover i {
+  transform: scale(1.2); /* Увеличение при наведении */
+}

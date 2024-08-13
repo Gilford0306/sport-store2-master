@@ -1,13 +1,13 @@
-import React from 'react';
-import './NavigationBar.css';
+import React from "react";
+import "./NavigationBar.css";
 
 const NavigationBar = () => {
   return (
     <div className="navigation-bar">
-      <a href="#">Новинки</a>
-      <a href="#">Чоловіки</a>
-      <a href="#">Жінки</a>
-      <a href="#">Діти</a>
+      <a href="/store">Новинки</a>
+      <a href="/store">Чоловіки</a>
+      <a href="/store">Жінки</a>
+      <a href="/store">Діти</a>
     </div>
   );
 };
