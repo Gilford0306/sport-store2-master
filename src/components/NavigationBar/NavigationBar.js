@@ -5,9 +5,9 @@ const NavigationBar = () => {
   return (
     <div className="navigation-bar">
       <a href="/store">Новинки</a>
-      <a href="/store">Чоловіки</a>
-      <a href="/store">Жінки</a>
-      <a href="/store">Діти</a>
+      <a href="/store?gender=Чоловік">Чоловіки</a>
+      <a href="/store?gender=Жінка">Жінки</a>
+      <a href="/store?gender=Унісекс">Унісекс</a>
     </div>
   );
 };

@@ -282,9 +282,9 @@ function App() {
     },
   ];
   return (
-    <UserProvider>
-      <CartProvider>
-        <FavoritesProvider>
+    <CartProvider>
+      <FavoritesProvider>
+        <UserProvider>
           <ProductProvider products={products}>
             <Router>
               <div className="App">
@@ -321,9 +321,9 @@ function App() {
               </div>
             </Router>
           </ProductProvider>
-        </FavoritesProvider>
-      </CartProvider>
-    </UserProvider>
+        </UserProvider>
+      </FavoritesProvider>
+    </CartProvider>
   );
 }
 

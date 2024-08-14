@@ -18,11 +18,10 @@ const Header = () => {
   const handleLogout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("refreshToken");
-    localStorage.removeItem("userId"); // Удаляем userId из localStorage
     clearFavorites(); // Очищаем избранные товары
-    clearCart();
-    logout();
-    navigate("/login");
+    clearCart(); // Очищаем корзину
+    logout(); // Выполняем логаут
+    navigate("/login"); // Перенаправляем на страницу входа
   };
 
   const handleIconClick = (path) => {
@@ -33,9 +32,13 @@ const Header = () => {
     navigate("/profile");
   };
 
+  const handleLogoClick = () => {
+    navigate("/"); // Перенаправляем на главную страницу
+  };
+
   return (
     <header className="header">
-      <div className="logo">
+      <div className="logo" onClick={handleLogoClick}>
         <img src={logo} alt="Planet Sports Logo" />
       </div>
       <NavigationBar />

@@ -1,3 +1,4 @@
+// src/contexts/FavoritesContext.js
 import React, { createContext, useState, useEffect, useContext } from "react";
 
 const FavoritesContext = createContext();
@@ -58,8 +59,8 @@ export function FavoritesProvider({ children }) {
         addFavorite,
         removeFavorite,
         clearFavorites,
-        setUser,
-        isFavorite, // Добавляем isFavorite в контекст
+        setUser, // Убедитесь, что setUser здесь
+        isFavorite,
       }}
     >
       {children}

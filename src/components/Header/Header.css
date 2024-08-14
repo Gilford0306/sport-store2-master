@@ -32,6 +32,10 @@
   margin-right: 100px;
 }
 
+.logo {
+  cursor: pointer;
+}
+
 .logo img {
   height: 60px;
 }

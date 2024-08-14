@@ -1,10 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import FilterSidebar from "../components/FilterSidebar/FilterSidebar";
 import ProductList from "../components/ProductList/ProductList";
 import "./ProductPage.css";
 import "./StorePage.css";
 
 function StorePage({ products }) {
+  const location = useLocation();
+
+  // Инициализация состояния фильтров
   const [filters, setFilters] = useState({
     categories: [],
     subcategories: [],
@@ -15,10 +19,25 @@ function StorePage({ products }) {
     activity: [],
   });
 
+  // Проверяем наличие параметра gender в URL и обновляем фильтры при загрузке страницы
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const genderFilter = params.get("gender");
+
+    if (genderFilter) {
+      setFilters((prevFilters) => ({
+        ...prevFilters,
+        gender: [genderFilter], // Устанавливаем фильтр по полу
+      }));
+    }
+  }, [location]);
+
+  // Функция для обновления фильтров
   const handleFilterChange = (newFilters) => {
     setFilters(newFilters);
   };
 
+  // Фильтрация продуктов на основе активных фильтров
   const filteredProducts = products.filter((product) => {
     const matchesCategory =
       filters.categories.length === 0 ||

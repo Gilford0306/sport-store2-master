@@ -1,18 +1,20 @@
-// src/pages/ProductPage.js
 import React, { useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom"; // Используем useNavigate для навигации
 import { useProducts } from "../components/contexts/ProductContext";
 import { useFavorites } from "../components/contexts/FavoritesContext";
 import { useCart } from "../components/contexts/CartContext";
+import { useUser } from "../components/contexts/UserContext"; // Используем UserContext
 import RelatedProducts from "../components/RelatedProducts/RelatedProducts";
 import "./StorePage.css";
 import "./ProductPage.css";
 
 function ProductPage() {
   const { productId } = useParams();
+  const navigate = useNavigate(); // Инициализируем useNavigate
   const products = useProducts();
   const { addFavorite, isFavorite, removeFavorite } = useFavorites();
   const { cartItems, addToCart, removeFromCart } = useCart();
+  const { userProfile } = useUser(); // Получаем данные о пользователе из UserContext
   const [selectedSize, setSelectedSize] = useState(null);
 
   const product = products.find((p) => p.id === parseInt(productId));
@@ -22,6 +24,11 @@ function ProductPage() {
   }
 
   const handleFavoriteClick = () => {
+    if (!userProfile) {
+      navigate("/login"); // Перенаправляем на страницу логина, если пользователь не авторизован
+      return;
+    }
+
     if (isFavorite(product.id)) {
       removeFavorite(product.id);
     } else {
@@ -30,6 +37,11 @@ function ProductPage() {
   };
 
   const handleAddToCart = () => {
+    if (!userProfile) {
+      navigate("/login"); // Перенаправляем на страницу логина, если пользователь не авторизован
+      return;
+    }
+
     const isInCart = cartItems.some((item) => item.id === product.id);
     if (isInCart) {
       removeFromCart(product.id);

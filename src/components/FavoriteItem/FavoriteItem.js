@@ -22,7 +22,7 @@ function FavoriteItem({ item, onRemove }) {
       onClick={handleItemClick}
       style={{ cursor: "pointer" }}
     >
-      <IconButton icon="heart" size="30px" color="red" />
+      <IconButton icon="heart" size="37px" color="red" />
       <ProductImage src={item.image} alt={item.name} />
       <ProductDescription
         name={item.name}

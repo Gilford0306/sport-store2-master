@@ -24,7 +24,7 @@ function CartItem({ item }) {
     updateItemChecked(item.id, newCheckedState);
   };
 
-  const handleImageClick = (event) => {
+  const handleDescriptionClick = (event) => {
     event.stopPropagation();
     navigate(`/product/${item.id}`);
   };
@@ -45,9 +45,12 @@ function CartItem({ item }) {
           src={item.image}
           alt={item.name}
           className="product-image"
-          onClick={handleImageClick}
+          // Удаляем обработчик кликов с картинки, если он не нужен
         />
-        <div className="product-description">
+        <div
+          className="product-description"
+          onClick={handleDescriptionClick} // Добавляем обработчик кликов для описания
+        >
           <ProductDescription name={item.name} description={item.description} />
         </div>
       </div>
@@ -59,7 +62,7 @@ function CartItem({ item }) {
         icon="trash"
         size="20px"
         onClick={(e) => {
-          e.stopPropagation();
+          e.stopPropagation(); // Предотвращаем всплытие события клика
           handleRemove();
         }}
       />

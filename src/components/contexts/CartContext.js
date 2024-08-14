@@ -11,7 +11,6 @@ export function CartProvider({ children }) {
   const [selectedItems, setSelectedItems] = useState([]);
   const [userId, setUserId] = useState(null);
 
-  // Загрузка данных из localStorage при инициализации
   useEffect(() => {
     const storedUserId = localStorage.getItem("userId");
     if (storedUserId) {
@@ -30,7 +29,6 @@ export function CartProvider({ children }) {
     }
   }, []);
 
-  // Сохранение данных в localStorage при изменении состояния
   useEffect(() => {
     if (userId) {
       localStorage.setItem(`cartItems-${userId}`, JSON.stringify(cartItems));
@@ -73,41 +71,15 @@ export function CartProvider({ children }) {
 
   const setUser = (id) => {
     setUserId(id);
-    localStorage.setItem("userId", id);
-
-    // Загрузка данных корзины для нового пользователя
-    const storedCartItems = localStorage.getItem(`cartItems-${id}`);
-    const storedSelectedItems = localStorage.getItem(`selectedItems-${id}`);
-
-    if (storedCartItems) {
-      setCartItems(JSON.parse(storedCartItems));
-    } else {
-      setCartItems([]); // Если данных нет, устанавливаем пустой массив
-    }
-
-    if (storedSelectedItems) {
-      setSelectedItems(JSON.parse(storedSelectedItems));
-    } else {
-      setSelectedItems([]); // Если данных нет, устанавливаем пустой массив
-    }
-  };
-
-  const logout = () => {
-    console.log("Logout function called");
-    setCartItems([]);
-    setSelectedItems([]);
-    localStorage.removeItem("userId");
-    if (userId) {
-      localStorage.removeItem(`cartItems-${userId}`);
-      localStorage.removeItem(`selectedItems-${userId}`);
-    }
-    setUserId(null);
   };
 
   const clearCart = () => {
     setCartItems([]);
-    localStorage.removeItem(`cartItems-${userId}`);
-    localStorage.removeItem(`selectedItems-${userId}`);
+    setSelectedItems([]);
+    if (userId) {
+      localStorage.removeItem(`cartItems-${userId}`);
+      localStorage.removeItem(`selectedItems-${userId}`);
+    }
   };
 
   return (
@@ -117,10 +89,9 @@ export function CartProvider({ children }) {
         selectedItems,
         addToCart,
         removeFromCart,
-        clearCart,
         updateItemChecked,
         setUser,
-        logout, // Добавляем logout в контекст
+        clearCart,
       }}
     >
       {children}
