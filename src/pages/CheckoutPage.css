@@ -1,34 +1,99 @@
-/* form {
-  background-color: white;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  max-width: 600px;
-  margin: 0 auto;
-}
 
-form label {
+/* Form labels and inputs */
+label {
   display: block;
-  margin: 10px 0 5px;
+  margin-bottom: 10px;
+  font-weight: bold;
 }
 
-form input, form select {
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="radio"],
+input[type="checkbox"] {
+  display: block;
   width: 100%;
-  padding: 10px;
-  border: 1px solid #ddd;
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
   border-radius: 4px;
+}
+
+input[type="radio"],
+input[type="checkbox"] {
+  display: inline-block;
+  width: auto;
+}
+
+input[type="radio"]+label,
+input[type="checkbox"]+label {
+  display: inline;
+  margin-left: 5px;
+}
+
+button {
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 4px;
+  color: #fff;
+  cursor: pointer;
+  background-color: #007bff;
+}
+
+button.continue-button {
+  background-color: #28a745;
+}
+
+button.submit-button {
+  background-color: #dc3545;
+}
+
+/* Selected items section */
+.selected-items {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 20px;
+  background-color: #f9f9f9;
+  margin-top: 20px;
+}
+
+.selected-items h2 {
   margin-bottom: 15px;
 }
 
-form button {
-  background-color: #007bff;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 4px;
-  cursor: pointer;
+.cart-item {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #ccc;
+  padding: 10px 0;
 }
 
-form button:hover {
-  background-color: #0056b3;
-} */
+.cart-item img {
+  max-width: 100px;
+  height: auto;
+  margin-right: 15px;
+  border-radius: 4px;
+}
+
+.item-details {
+  flex: 1;
+}
+
+.item-details p {
+  margin: 5px 0;
+}
+
+.item-details p:last-child {
+  font-weight: bold;
+}
+
+/* Thank you message */
+.thank-you {
+  text-align: center;
+  margin-top: 20px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}

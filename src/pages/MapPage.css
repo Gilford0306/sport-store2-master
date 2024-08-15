@@ -1,0 +1,9 @@
+.store-list {
+    padding: 20px;
+}
+
+.map-container {
+    position: relative;
+    height: 500px;
+    width: 100%;
+}

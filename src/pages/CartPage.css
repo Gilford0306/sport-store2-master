@@ -9,6 +9,18 @@
   overflow-y: auto; /* Позволяет прокрутку, если элементов больше, чем в видимой области */
 }
 
+.cart-items p {
+  text-align: center;
+    margin-bottom: 300px;
+}
+
+.cart-items h3 {
+    margin-top: 150px;
+  text-align: center;
+
+}
+
+
 .cart-summary {
   flex: 1; /* 25% от ширины контейнера */
   padding: 20px;

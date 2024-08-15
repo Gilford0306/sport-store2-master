@@ -14,6 +14,9 @@ import ErrorPage from "./pages/ErrorPage";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsOfUses from "./pages/TermsOfUses";
 import StorePage from "./pages/StorePage";
+import MapPage from "./pages/MapPage";
+import HelpPage from "./pages/HelpPage";
+import GiftCardPage from "./pages/GiftCardPage";
 
 import { CartProvider } from "./components/contexts/CartContext";
 import { UserProvider } from "./components/contexts/UserContext";
@@ -301,6 +304,7 @@ function App() {
                       <Route path="/login" element={<LoginPage />} />
                       <Route path="/signup" element={<SignupPage />} />
                       <Route path="*" element={<ErrorPage />} />
+                      <Route path="/help" element={<HelpPage />} />
                       <Route
                         path="/privacy-policy"
                         element={<PrivacyPolicy />}
@@ -314,6 +318,8 @@ function App() {
                         path="/product/:productId"
                         element={<ProductPage />}
                       />
+                      <Route path="/map" element={<MapPage />} />
+                      <Route path="/gift" element={<GiftCardPage />} />
                     </Routes>
                   </main>
                 </div>

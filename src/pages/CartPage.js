@@ -10,11 +10,18 @@ function CartPage() {
 
   return (
     <div className="cart-page">
-      <div className="cart-items">
-        {cartItems.map((item) => (
-          <CartItem key={item.id} item={item} />
-        ))}
-      </div>
+      {cartItems.length === 0 ? (
+        <div className="cart-items">
+          <h3>Кошик</h3>
+          <p>У вашому кошику немає речей</p>
+        </div>
+      ) : (
+        <div className="cart-items">
+          {cartItems.map((item) => (
+            <CartItem key={item.id} item={item} />
+          ))}
+        </div>
+      )}
       <CartSummary />
     </div>
   );

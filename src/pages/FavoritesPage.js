@@ -12,13 +12,21 @@ function FavoritesPage() {
 
   return (
     <div className="favorites-page">
-      <div className="favorites-items">
-        {favorites.map((item) => (
-          <FavoriteItem key={item.id} item={item} onRemove={handleRemove} />
-        ))}
-      </div>
+      {favorites.length === 0 ? (
+        <div className="favorites-items-zero">
+          <h3>Обрані</h3>
+          <p>У вас немає обраних речей</p>
+        </div>
+      ) : (
+        <div className="favorites-items">
+          {favorites.map((item) => (
+            <FavoriteItem key={item.id} item={item} onRemove={handleRemove}  />
+          ))}
+        </div>
+      )}
     </div>
   );
 }
 
 export default FavoritesPage;
+
