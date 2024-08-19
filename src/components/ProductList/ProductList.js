@@ -3,16 +3,7 @@ import React, { useEffect, useRef } from "react";
 import ProductItem from "../ProductItem/ProductItem";
 import "./ProductList.css";
 
-//   useEffect(() => {
-//   // Fetch products from an API
-//   const fetchProducts = async () => {
-//     const response = await fetch('/api/products');
-//     const data = await response.json();
-//     setProducts(data);
-//   };
 
-//   fetchProducts();
-// }, []);
 
 function ProductList({ products }) {
   const listRef = useRef(null);

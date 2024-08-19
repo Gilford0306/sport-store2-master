@@ -3,56 +3,52 @@ import { useCart } from '../components/contexts/CartContext'; // Подключ�
 
 function CheckoutPage() {
   const [step, setStep] = useState(1);
-  const [deliveryMethod, setDeliveryMethod] = useState('');
-  const [cardType, setCardType] = useState('');
-  const [cardNumber, setCardNumber] = useState('');
-  const [cvv, setCvv] = useState('');
-  const [expiryDate, setExpiryDate] = useState('');
-  const { selectedItems, userId } = useCart(); // Используем данные из контекста корзины
+  const [deliveryOption, setDeliveryOption] = useState('');
+  const [cardOption, setCardOption] = useState('');
+  const [creditCardNumber, setCreditCardNumber] = useState('');
+  const [cvvCode, setCvvCode] = useState('');
+  const [expirationDate, setExpirationDate] = useState('');
+  const { selectedItems } = useCart(); // Используем данные из контекста корзины
 
-  const handleContinue = (e) => {
+  const handleNextStep = (e) => {
     e.preventDefault();
     setStep(step + 1);
   };
 
-  const handleDeliveryChange = (e) => {
-    setDeliveryMethod(e.target.value);
+  const handleDeliveryOptionChange = (e) => {
+    setDeliveryOption(e.target.value);
   };
 
-  const handleCardTypeChange = (e) => {
-    setCardType(e.target.value);
+  const handleCardOptionChange = (e) => {
+    setCardOption(e.target.value);
   };
 
-  const handleSubmitOrder = async () => {
+  const handleOrderSubmission = async () => {
     const order = {
       ProductId: selectedItems.map(item => item.id),
-      UserId: 1,
-      StatusId: 1, // Например, статус по умолчанию
+      StatusId: 1, // По умолчанию статус "в процессе" или другой начальный статус
       Amount: selectedItems.reduce((total, item) => total + item.price * (item.quantity || 1), 0),
     };
 
-    // try {
-    //   const response = await fetch('https://localhost:7000/api/Order/CreateOrder', {
-    //     method: 'POST',
-    //     headers: {
-    //       'Content-Type': 'application/json',
-    //       Authorization: `Bearer ${localStorage.getItem('token')}`, // Если нужно
-    //     },
-    //     body: JSON.stringify(order),
-    //   });
+    try {
+      const response = await fetch('/api/Order/CreateOrder', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(order),
+      });
 
-    //   if (!response.ok) {
-    //     const errorData = await response.json();
-    //     throw new Error(`Error creating order: ${errorData.message || 'Unknown error'}`);
-    //   }
-
-    //   const result = await response.json();
-    //   console.log('Order created:', result);
-    //   setStep(4); 
-    // } catch (error) {
-    //   console.error('Error:', error);
-    //   alert('Error creating order');
-    // }
+      if (response.ok) {
+        const data = await response.json();
+        console.log('Order created:', data);
+        setStep(4); // Переход на шаг 4
+      } else {
+        console.error('Failed to create order');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    }
   };
 
   return (
@@ -60,90 +56,90 @@ function CheckoutPage() {
       <h1>Оформлення замовлення</h1>
 
       {step === 1 && (
-        <form onSubmit={handleContinue}>
+        <form onSubmit={handleNextStep} className="checkout-form">
           <h2>Ваші дані</h2>
-          <label htmlFor="firstName">Ім'я:</label>
-          <input type="text" id="firstName" name="firstName" required />
+          <label htmlFor="firstNameInput">Ім'я:</label>
+          <input type="text" id="firstNameInput" name="firstName" required />
 
-          <label htmlFor="lastName">Прізвище:</label>
-          <input type="text" id="lastName" name="lastName" required />
+          <label htmlFor="lastNameInput">Прізвище:</label>
+          <input type="text" id="lastNameInput" name="lastName" required />
 
-          <label htmlFor="email">E-mail:</label>
-          <input type="email" id="email" name="email" required />
+          <label htmlFor="emailInput">E-mail:</label>
+          <input type="email" id="emailInput" name="email" required />
 
-          <label htmlFor="phone">Номер телефону:</label>
-          <input type="tel" id="phone" name="phone" required />
+          <label htmlFor="phoneInput">Номер телефону:</label>
+          <input type="tel" id="phoneInput" name="phone" required />
 
-          <button type="submit" className="continue-button">Продовжити</button>
+          <button type="submit" className="continue-button-check">Продовжити</button>
         </form>
       )}
 
       {step === 2 && (
-        <form onSubmit={handleContinue}>
+        <form onSubmit={handleNextStep} className="checkout-form">
           <h2>Варіанти доставки</h2>
           <div className="delivery-options">
             <label>
               <input
                 type="radio"
-                name="deliveryMethod"
+                name="deliveryOption"
                 value="storePickup"
-                onChange={handleDeliveryChange}
+                onChange={handleDeliveryOptionChange}
               />
               Доставка в магазин
             </label>
             <label>
               <input
                 type="radio"
-                name="deliveryMethod"
+                name="deliveryOption"
                 value="branchDelivery"
-                onChange={handleDeliveryChange}
+                onChange={handleDeliveryOptionChange}
               />
               Доставка у відділення
             </label>
           </div>
 
-          {deliveryMethod === "branchDelivery" && (
+          {deliveryOption === "branchDelivery" && (
             <div className="branch-delivery-options">
               <label>
-                <input type="checkbox" name="novaPoshta" />
+                <input type="checkbox" name="novaPoshtaOption" />
                 Нова пошта
               </label>
               <label>
-                <input type="checkbox" name="ukrPoshta" />
+                <input type="checkbox" name="ukrPoshtaOption" />
                 Укр пошта
               </label>
 
-              <label htmlFor="branchAddress">Місто та адреса:</label>
-              <input type="text" id="branchAddress" name="branchAddress" required />
+              <label htmlFor="branchAddressInput">Місто та адреса:</label>
+              <input type="text" id="branchAddressInput" name="branchAddress" required />
 
-              <label htmlFor="branchNumber">Номер відділення:</label>
-              <input type="text" id="branchNumber" name="branchNumber" required />
+              <label htmlFor="branchNumberInput">Номер відділення:</label>
+              <input type="text" id="branchNumberInput" name="branchNumber" required />
             </div>
           )}
 
-          {deliveryMethod && (
+          {deliveryOption && (
             <div className="address-fields">
-              <label htmlFor="country">Країна:</label>
-              <input type="text" id="country" name="country" required />
+              <label htmlFor="countryInput">Країна:</label>
+              <input type="text" id="countryInput" name="country" required />
 
-              <label htmlFor="postalCode">Поштовий Індекс:</label>
-              <input type="text" id="postalCode" name="postalCode" required />
+              <label htmlFor="postalCodeInput">Поштовий Індекс:</label>
+              <input type="text" id="postalCodeInput" name="postalCode" required />
             </div>
           )}
 
-          <button type="submit" className="continue-button">Продовжити</button>
+          <button type="submit" className="continue-button-check">Продовжити</button>
         </form>
       )}
 
       {step === 3 && (
-        <form onSubmit={(e) => { e.preventDefault(); handleSubmitOrder(); }}>
+        <form onSubmit={(e) => { e.preventDefault(); handleOrderSubmission(); }} className="checkout-form">
           <h2>Оплата</h2>
           <label>
             <input
               type="radio"
-              name="cardType"
+              name="cardOption"
               value="visa"
-              onChange={handleCardTypeChange}
+              onChange={handleCardOptionChange}
               required
             />
             Visa
@@ -151,45 +147,45 @@ function CheckoutPage() {
           <label>
             <input
               type="radio"
-              name="cardType"
+              name="cardOption"
               value="mastercard"
-              onChange={handleCardTypeChange}
+              onChange={handleCardOptionChange}
               required
             />
             MasterCard
           </label>
 
-          <label htmlFor="cardNumber">Номер картки:</label>
+          <label htmlFor="creditCardNumberInput">Номер картки:</label>
           <input
             type="text"
-            id="cardNumber"
-            name="cardNumber"
-            value={cardNumber}
-            onChange={(e) => setCardNumber(e.target.value)}
+            id="creditCardNumberInput"
+            name="creditCardNumber"
+            value={creditCardNumber}
+            onChange={(e) => setCreditCardNumber(e.target.value)}
             required
           />
 
-          <label htmlFor="cvv">CVV:</label>
+          <label htmlFor="cvvCodeInput">CVV:</label>
           <input
             type="text"
-            id="cvv"
-            name="cvv"
-            value={cvv}
-            onChange={(e) => setCvv(e.target.value)}
+            id="cvvCodeInput"
+            name="cvvCode"
+            value={cvvCode}
+            onChange={(e) => setCvvCode(e.target.value)}
             required
           />
 
-          <label htmlFor="expiryDate">Термін дії:</label>
+          <label htmlFor="expirationDateInput">Термін дії:</label>
           <input
             type="text"
-            id="expiryDate"
-            name="expiryDate"
-            value={expiryDate}
-            onChange={(e) => setExpiryDate(e.target.value)}
+            id="expirationDateInput"
+            name="expirationDate"
+            value={expirationDate}
+            onChange={(e) => setExpirationDate(e.target.value)}
             required
           />
 
-          <button type="submit" className="submit-button">Замовити</button>
+          <button type="submit" className="submit-button-check">Замовити</button>
         </form>
       )}
 
@@ -198,22 +194,6 @@ function CheckoutPage() {
           <h2>Дякуємо за замовлення</h2>
           <p>Очікуйте повідомлення про відправлення</p>
         </div>
-      )}
-
-      {step !== 1 && (
-        <section className="selected-items">
-          <h2>Обрані товари</h2>
-          {selectedItems.map(item => (
-            <div key={item.id} className="cart-item">
-              <img src={item.image} alt={item.name} />
-              <div className="item-details">
-                <p>{item.name}</p>
-                <p>{item.description}</p>
-                <p>{item.price} грн</p>
-              </div>
-            </div>
-          ))}
-        </section>
       )}
     </main>
   );

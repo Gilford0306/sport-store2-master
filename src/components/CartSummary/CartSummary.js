@@ -27,7 +27,6 @@ function CartSummary() {
   }, [selectedItems]);
 
   useEffect(() => {
-    // Сброс значений при изменении маршрута и при монтировании компонента
     setTotalCost(0);
     setDeliveryCost(0);
     setTotalAmount(0);
@@ -37,7 +36,7 @@ function CartSummary() {
   }, [location.pathname]);
 
   const handleCheckout = () => {
-    navigate('/checkout');
+    navigate('/order');
   };
 
   return (

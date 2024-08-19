@@ -58,7 +58,6 @@ function ProductPage() {
         </div>
         <div className="product-details-section">
           <h1>{product.name}</h1>
-          <p>{product.description}</p>
           <p className="product-price">{product.price} грн</p>
 
           <div className="product-size-selector">
@@ -101,7 +100,7 @@ function ProductPage() {
             </button>
           </div>
 
-          <div className="product-description">
+          <div className="product-description-product">
             <h3>Опис</h3>
             <p>{product.full_description}</p>
           </div>

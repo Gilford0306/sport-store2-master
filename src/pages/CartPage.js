@@ -1,4 +1,3 @@
-// src/pages/CartPage.js
 import React from "react";
 import { useCart } from "../components/contexts/CartContext";
 import CartItem from "../components/CartItem/CartItem";
@@ -11,14 +10,14 @@ function CartPage() {
   return (
     <div className="cart-page">
       {cartItems.length === 0 ? (
-        <div className="cart-items">
+        <div className="cart-items-zero">
           <h3>Кошик</h3>
           <p>У вашому кошику немає речей</p>
         </div>
       ) : (
         <div className="cart-items">
           {cartItems.map((item) => (
-            <CartItem key={item.id} item={item} />
+            <CartItem key={`${item.id}-${item.size}`} item={item} />
           ))}
         </div>
       )}

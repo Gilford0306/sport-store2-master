@@ -10,16 +10,33 @@
 }
 
 .cart-items p {
-  text-align: center;
-    margin-bottom: 300px;
+  text-align: left;
+
 }
 
 .cart-items h3 {
-    margin-top: 150px;
-  text-align: center;
+  padding-left:10PX ;
+  text-align: left;
 
 }
 
+.cart-items-zero p {
+  text-align: center;
+  margin-bottom: 300px;
+}
+
+.cart-items-zero h3 {
+  margin-top: 150px;
+  text-align: center;
+
+}
+.cart-items-zero {
+  flex: 3;
+  /* 75% от ширины контейнера */
+  padding: 20px;
+  overflow-y: auto;
+  /* Позволяет прокрутку, если элементов больше, чем в видимой области */
+}
 
 .cart-summary {
   flex: 1; /* 25% от ширины контейнера */

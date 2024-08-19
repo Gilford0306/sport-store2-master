@@ -45,13 +45,12 @@ function CartItem({ item }) {
           src={item.image}
           alt={item.name}
           className="product-image"
-          // Удаляем обработчик кликов с картинки, если он не нужен
         />
         <div
           className="product-description"
-          onClick={handleDescriptionClick} // Добавляем обработчик кликов для описания
+          onClick={handleDescriptionClick} 
         >
-          <ProductDescription name={item.name} description={item.description} />
+          <ProductDescription name={item.name} gender={item.gender} subcategory={item.subcategory} description={item.brand}/>
         </div>
       </div>
       <div className="item-price">
