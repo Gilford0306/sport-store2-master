@@ -1,30 +1,32 @@
-import React, { useState } from 'react';
-import './OrderPage.css';
-import { useCart } from '../components/contexts/CartContext';
+import React, { useState } from "react";
+import { useCart } from "../components/contexts/CartContext";
+import { useUser } from "../components/contexts/UserContext";
+import "./OrderPage.css";
 
 const OrderPage = () => {
   const { selectedItems } = useCart();
+  const { userId } = useUser();
   const [currentStep, setCurrentStep] = useState(1);
   const [isCashOnDelivery, setIsCashOnDelivery] = useState(false);
   const [formData, setFormData] = useState({
-    name: '',
-    surname: '',
-    email: '',
-    phone: '',
-    deliveryOption: '',
-    address: '',
-    additionalInfo: '',
-    country: '',
-    postalCode: '',
-    paymentMethod: '',
-    cardNumber: '',
-    cw2: '',
-    expiryDate: '',
-    billingAddress: ''
+    name: "",
+    surname: "",
+    email: "",
+    phone: "",
+    deliveryOption: "",
+    address: "",
+    additionalInfo: "",
+    country: "",
+    postalCode: "",
+    paymentMethod: "",
+    cardNumber: "",
+    cw2: "",
+    expiryDate: "",
+    billingAddress: "",
   });
 
   const handleNextStep = () => {
-    setCurrentStep(prevStep => prevStep + 1);
+    setCurrentStep((prevStep) => prevStep + 1);
   };
 
   const handleCheckboxChange = () => {
@@ -33,43 +35,76 @@ const OrderPage = () => {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prevData => ({
+    setFormData((prevData) => ({
       ...prevData,
-      [name]: value
+      [name]: value,
     }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (currentStep === 3 && !isCashOnDelivery) {
-      // Отправка данных заказа на сервер
       try {
-        const response = await fetch('https://localhost:7000/api/Order/CreateOrder', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${localStorage.getItem('authToken')}`
-          },
-          body: JSON.stringify({
-            ProductId: selectedItems[0]?.id, 
-            UserId: 1,
-            StatusId: 1,
-            Amount: 1
-          })
-        });
+        const token = localStorage.getItem("token");
+        const orderResponse = await fetch(
+          "https://localhost:7000/api/Order/CreateOrder",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`, // Использование токена
+            },
+            body: JSON.stringify({
+              ProductId: selectedItems[0]?.id,
+              UserId: userId, // Используйте настоящий userId
+              StatusId: 1,
+              Amount: 1,
+            }),
+          }
+        );
 
-        if (!response.ok) {
-          throw new Error('Failed to create order');
+        if (!orderResponse.ok) {
+          throw new Error("Failed to create order");
         }
 
-        const result = await response.json();
-        console.log('Order created:', result);
-        handleNextStep(); // Переход к следующему шагу
+        const orderResult = await orderResponse.json();
+        console.log("Order created:", orderResult);
+
+        // Создайте объект доставки из данных формы
+        const deliveryData = {
+          OrderId: orderResult.Id, // предполагаем, что id заказа возвращается в ответе
+          Address: formData.address,
+          Additionally: formData.additionalInfo,
+          Date: new Date(), // Используйте текущую дату или другую, если требуется
+        };
+
+        // Отправьте данные для создания записи о доставке
+        const deliveryResponse = await fetch(
+          "https://localhost:7000/api/Delivery/CreateDelivery",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`, // Использование токена
+            },
+            body: JSON.stringify(deliveryData),
+          }
+        );
+
+        if (!deliveryResponse.ok) {
+          throw new Error("Failed to create delivery");
+        }
+
+        const deliveryResult = await deliveryResponse.json();
+        console.log("Delivery created:", deliveryResult);
+
+        // Перейти к следующему шагу
+        handleNextStep();
       } catch (error) {
-        console.error('Error submitting order:', error);
+        console.error("Error submitting order or delivery:", error);
       }
     } else {
-      handleNextStep(); // Переход к следующему шагу
+      handleNextStep();
     }
   };
 
@@ -120,14 +155,19 @@ const OrderPage = () => {
                 required
               />
             </div>
-            <button type="submit" className="submit-form">Продовжити</button>
+            <button type="submit" className="submit-form">
+              Продовжити
+            </button>
           </form>
           <div className="selected-items">
             <h2>Обрані товари</h2>
             {selectedItems.length > 0 ? (
               selectedItems.map((item) => (
                 <div className="item" key={item.id}>
-                  <img src={item.image || "https://via.placeholder.com/150"} alt={item.name} />
+                  <img
+                    src={item.image || "https://via.placeholder.com/150"}
+                    alt={item.name}
+                  />
                   <div>
                     <p>{item.name}</p>
                     <p>{item.price} грн.</p>
@@ -152,7 +192,7 @@ const OrderPage = () => {
                     type="radio"
                     name="deliveryOption"
                     value="store"
-                    checked={formData.deliveryOption === 'store'}
+                    checked={formData.deliveryOption === "store"}
                     onChange={handleInputChange}
                   />
                   Доставка в магазин
@@ -162,7 +202,7 @@ const OrderPage = () => {
                     type="radio"
                     name="deliveryOption"
                     value="department"
-                    checked={formData.deliveryOption === 'department'}
+                    checked={formData.deliveryOption === "department"}
                     onChange={handleInputChange}
                   />
                   Доставка у відділення
@@ -212,14 +252,19 @@ const OrderPage = () => {
                 />
               </div>
             </div>
-            <button type="submit" className="submit-form">Продовжити</button>
+            <button type="submit" className="submit-form">
+              Продовжити
+            </button>
           </form>
           <div className="selected-items">
             <h2>Обрані товари</h2>
             {selectedItems.length > 0 ? (
               selectedItems.map((item) => (
                 <div className="item" key={item.id}>
-                  <img src={item.image || "https://via.placeholder.com/150"} alt={item.name} />
+                  <img
+                    src={item.image || "https://via.placeholder.com/150"}
+                    alt={item.name}
+                  />
                   <div>
                     <p>{item.name}</p>
                     <p>{item.price} грн.</p>
@@ -243,7 +288,7 @@ const OrderPage = () => {
                   type="radio"
                   name="paymentMethod"
                   value="visa"
-                  checked={formData.paymentMethod === 'visa'}
+                  checked={formData.paymentMethod === "visa"}
                   onChange={handleInputChange}
                 />
                 Visa
@@ -255,7 +300,7 @@ const OrderPage = () => {
                   type="radio"
                   name="paymentMethod"
                   value="mastercard"
-                  checked={formData.paymentMethod === 'mastercard'}
+                  checked={formData.paymentMethod === "mastercard"}
                   onChange={handleInputChange}
                 />
                 MasterCard
@@ -301,12 +346,14 @@ const OrderPage = () => {
                 required
               />
             </div>
-            <button type="submit" className="submit-form">Замовити</button>
+            <button type="submit" className="submit-form">
+              Замовити
+            </button>
           </form>
         </div>
       )}
 
-      {currentStep === 4 || (currentStep === 3 && isCashOnDelivery) && (
+      {currentStep === 4 && (
         <div className="centered-content">
           <h2>Дякуємо за замовлення</h2>
           <p>Очікуйте повідомлення про відправлення.</p>

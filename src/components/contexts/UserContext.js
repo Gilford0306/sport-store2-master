@@ -6,8 +6,8 @@ export const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
   const [userProfile, setUserProfile] = useState(null);
-  const { setUser: setCartUser } = useCart(); // Функция из CartContext
-  const { setUser: setFavoritesUser } = useFavorites(); // Функция из FavoritesContext
+  const { setUser: setCartUser } = useCart();
+  const { setUser: setFavoritesUser } = useFavorites();
 
   useEffect(() => {
     const savedProfile = localStorage.getItem("userProfile");
@@ -20,7 +20,7 @@ export const UserProvider = ({ children }) => {
         setFavoritesUser(savedUserId);
       }
     }
-  }, [setCartUser, setFavoritesUser]); // Добавляем зависимости
+  }, [setCartUser, setFavoritesUser]);
 
   const logout = () => {
     setUserProfile(null);
@@ -33,16 +33,20 @@ export const UserProvider = ({ children }) => {
     setFavoritesUser(null);
   };
 
-  const login = (user) => {
+  const login = (user, token, refreshToken) => {
     setUserProfile(user);
     localStorage.setItem("userProfile", JSON.stringify(user));
     localStorage.setItem("userId", user.id);
+    localStorage.setItem("token", token);
+    localStorage.setItem("refreshToken", refreshToken);
     setCartUser(user.id);
     setFavoritesUser(user.id);
   };
 
   return (
-    <UserContext.Provider value={{ userProfile, login, logout }}>
+    <UserContext.Provider
+      value={{ userProfile, login, logout, userId: userProfile?.id }}
+    >
       {children}
     </UserContext.Provider>
   );

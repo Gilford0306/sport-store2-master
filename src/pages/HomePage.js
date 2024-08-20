@@ -13,6 +13,14 @@ import magtop3 from "../components/assets/Frame 82.svg";
 import clothingImage from "../components/assets/Clothing.jpg"; // путь к изображению одежды
 import footwearImage from "../components/assets/Footwear.jpg"; // путь к изображению обуви
 import accessoriesImage from "../components/assets/Accessories.jpg"; // путь к изображению аксессуаров
+import Frame1 from "../components/assets/store/Frame1.png";
+import Frame2 from "../components/assets/store/Frame2.png";
+import Frame3 from "../components/assets/store/Frame3.png";
+import Frame4 from "../components/assets/store/Frame4.png";
+import Frame5 from "../components/assets/store/Frame5.png";
+import Frame6 from "../components/assets/store/Frame6.png";
+
+const images = [Frame1, Frame2, Frame3, Frame4, Frame5, Frame6];
 
 function HomePage() {
   return (
@@ -34,18 +42,6 @@ function HomePage() {
           <img src={magtop3} alt="magtop" className="magtop3" />
         </a>
       </div>
-
-      {/* <div className="banner">
-       <img src={heroImage} alt="Cyclist" className="cyclist-image" />
-       <img src={vectorImage} alt="Vector Overlay" className="vector-image" /> 
-      <h1>Твоя перемога ближче, ніж здається!</h1>
-      <p>Знижка до 70% на весь асортимент спортивних товарів!</p>
-    </div>
-    <div className="product-list">
-      <div className="product">Продукт 1</div>
-      <div className="product">Продукт 2</div>
-      <div className="product">Продукт 3</div>
-    </div> */}
 
       <div className="middle-section">
         <h2>РУХАЙСЯ</h2>
@@ -77,10 +73,15 @@ function HomePage() {
       <div className="hit-prodagy">
         <h1>Хит продажу</h1>
         <div className="product-container">
-          {[...Array(6)].map((_, index) => (
-            <div key={index} className="product-card">
+          {images.map((image, index) => (
+            <div key={index} className="product-card-best">
+              <img
+                src={image}
+                alt={`Product ${index + 1}`}
+                className="product-image-best"
+              />
               <a href="/store">
-                <button className="shop-button">Магазин</button>
+                <button className="shop-button-best">Магазин</button>
               </a>
             </div>
           ))}
