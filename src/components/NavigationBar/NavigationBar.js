@@ -5,8 +5,8 @@ const NavigationBar = () => {
   return (
     <div className="navigation-bar">
       <a href="/store">Новинки</a>
-      <a href="/store?gender=Чоловік">Чоловіки</a>
-      <a href="/store?gender=Жінка">Жінки</a>
+      <a href="/store?gender=Чоловіче">Чоловіки</a>
+      <a href="/store?gender=Жіноче">Жінки</a>
       <a href="/store?gender=Унісекс">Унісекс</a>
     </div>
   );

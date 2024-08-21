@@ -231,8 +231,8 @@ function FilterSidebar({ onFilterChange }) {
           <label>
             <input
               type="checkbox"
-              name="Чоловік"
-              onChange={(e) => handleCheckboxChange("gender", ["Чоловік"])}
+              name="Чоловіче"
+              onChange={(e) => handleCheckboxChange("gender", ["Чоловіче"])}
             />
             Чоловік
           </label>
@@ -241,8 +241,8 @@ function FilterSidebar({ onFilterChange }) {
           <label>
             <input
               type="checkbox"
-              name="Жінка"
-              onChange={(e) => handleCheckboxChange("gender", ["Жінка"])}
+              name="Жіноче"
+              onChange={(e) => handleCheckboxChange("gender", ["Жіноче"])}
             />
             Жінка
           </label>

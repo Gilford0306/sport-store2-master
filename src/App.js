@@ -106,8 +106,8 @@ function App() {
         );
 
         const updatedProducts = productsWithPhotos.map((product) => {
-          const brand = brandsData.find((b) => b.Id === product.BrandId); // Находим бренд по Id
-          const color = colorsData.find((c) => c.Id === product.ColorId); // Находим цвет по Id
+          const brand = brandsData.find((b) => b.Id === product.BrandId);
+          const color = colorsData.find((c) => c.Id === product.ColorId);
           const category = cathegoriesData.find(
             (b) => b.Id === product.CathegoryId
           ); // Находим категорию по Id
