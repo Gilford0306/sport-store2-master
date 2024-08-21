@@ -51,7 +51,7 @@ function LoginPage() {
       }
 
       const profileData = await profileResponse.json();
-      loginContext(profileData);
+      loginContext(profileData, data.token, data.refreshToken); // Передаем правильные параметры
 
       // Устанавливаем ID пользователя в контексте избранных товаров
       setUser(profileData.id);
