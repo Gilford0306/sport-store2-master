@@ -9,7 +9,8 @@ export const UserProvider = ({ children }) => {
   const { setUser: setCartUser } = useCart();
   const { setUser: setFavoritesUser } = useFavorites();
 
-  useEffect(() => {
+  // Функция для загрузки профиля пользователя
+  const loadUserProfile = () => {
     const savedProfile = localStorage.getItem("userProfile");
     const savedUserId = localStorage.getItem("userId");
 
@@ -20,6 +21,10 @@ export const UserProvider = ({ children }) => {
         setFavoritesUser(savedUserId);
       }
     }
+  };
+
+  useEffect(() => {
+    loadUserProfile(); // Загрузка профиля при монтировании компонента
   }, [setCartUser, setFavoritesUser]);
 
   const logout = () => {
@@ -45,7 +50,13 @@ export const UserProvider = ({ children }) => {
 
   return (
     <UserContext.Provider
-      value={{ userProfile, login, logout, userId: userProfile?.id }}
+      value={{
+        userProfile,
+        login,
+        logout,
+        loadUserProfile,
+        userId: userProfile?.id,
+      }}
     >
       {children}
     </UserContext.Provider>
