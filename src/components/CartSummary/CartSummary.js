@@ -11,12 +11,10 @@ function CartSummary() {
   const navigate = useNavigate(); // Используем хук useNavigate для навигации
 
   useEffect(() => {
-    // Функция для расчета итогов заказа
     const calculateTotals = () => {
       const total = selectedItems.reduce((sum, item) => sum + item.price, 0);
       setTotalCost(total);
 
-      // Устанавливаем стоимость доставки в 0, если totalCost = 0
       const delivery = total > 0 && total < 3000 ? 200 : 0;
       setDeliveryCost(delivery);
 
@@ -36,7 +34,7 @@ function CartSummary() {
   }, [location.pathname]);
 
   const handleCheckout = () => {
-    navigate('/order');
+    navigate("/order");
   };
 
   return (

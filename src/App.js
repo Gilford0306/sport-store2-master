@@ -101,6 +101,7 @@ function App() {
               ...product,
               image:
                 photosData.length > 0 ? photosData[0].URL : "placeholder.jpg",
+              isAvailable: product.IsAvailable,
             };
           })
         );
@@ -131,6 +132,7 @@ function App() {
             brand: brand ? brand.Name : "Unknown",
             color: color ? color.Name : "Unknown",
             sport: sport ? sport.Name : "Unknown",
+            isAvailable: product.isAvailable,
           };
         });
 

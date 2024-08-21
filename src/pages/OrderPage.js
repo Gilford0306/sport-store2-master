@@ -4,7 +4,7 @@ import { useUser } from "../components/contexts/UserContext";
 import "./OrderPage.css";
 
 const OrderPage = () => {
-  const { selectedItems, removeFromCart } = useCart();
+  const { selectedItems, clearCart } = useCart();
   const { userId } = useUser();
   const [currentStep, setCurrentStep] = useState(1);
   const [isCashOnDelivery, setIsCashOnDelivery] = useState(false);
@@ -48,54 +48,57 @@ const OrderPage = () => {
       if (isCashOnDelivery) {
         try {
           const token = localStorage.getItem("token");
-          const response = await fetch(
-            "https://localhost:7000/api/Order/CreateOrder",
-            {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${token}`,
-              },
-              body: JSON.stringify({
-                ProductId: selectedItems[0]?.id,
-                UserId: 1, // Замените на реальный ID пользователя
-                StatusId: 1,
-                Amount: 1,
-              }),
-            }
+
+          // Создайте заказы для всех товаров
+          const orderResponses = await Promise.all(
+            selectedItems.map((item) =>
+              fetch("https://localhost:7000/api/Order/CreateOrder", {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                  Authorization: `Bearer ${token}`,
+                },
+                body: JSON.stringify({
+                  ProductId: item.id,
+                  UserId: userId,
+                  StatusId: 1,
+                  Amount: 1,
+                }),
+              })
+            )
           );
 
-          if (!response.ok) {
-            throw new Error("Failed to create order");
-          }
-
-          const result = await response.json();
-          console.log("Order created:", result);
-
-          // После успешного создания заказа вызываем CreateDelivery
-          const deliveryResponse = await fetch(
-            "https://localhost:7000/api/Delivery/CreateDelivery",
-            {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${token}`,
-              },
-              body: JSON.stringify({
-                OrderId: result.id, // Используйте ID заказа, возвращенный из API
-                Address: formData.address,
-                Additionally: formData.additionalInfo,
-                Date: new Date().toISOString(), // Устанавливаем текущую дату
-              }),
-            }
+          // Получите все ID созданных заказов
+          const orderResults = await Promise.all(
+            orderResponses.map((res) => res.json())
           );
 
-          if (!deliveryResponse.ok) {
-            throw new Error("Failed to create delivery");
-          }
+          console.log("Orders created:", orderResults);
 
-          const deliveryResult = await deliveryResponse.json();
-          console.log("Delivery created:", deliveryResult);
+          // Создайте доставку для каждого заказа
+          const deliveryResponses = await Promise.all(
+            orderResults.map((order) =>
+              fetch("https://localhost:7000/api/Delivery/CreateDelivery", {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                  Authorization: `Bearer ${token}`,
+                },
+                body: JSON.stringify({
+                  OrderId: order.id,
+                  Address: formData.address,
+                  Additionally: formData.additionalInfo,
+                  Date: new Date().toISOString(),
+                }),
+              })
+            )
+          );
+
+          const deliveryResults = await Promise.all(
+            deliveryResponses.map((res) => res.json())
+          );
+
+          console.log("Deliveries created:", deliveryResults);
 
           setCurrentStep(4); // Переход к шагу 4
         } catch (error) {
@@ -107,58 +110,66 @@ const OrderPage = () => {
     } else if (currentStep === 3 && !isCashOnDelivery) {
       try {
         const token = localStorage.getItem("token");
-        const response = await fetch(
-          "https://localhost:7000/api/Order/CreateOrder",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${token}`,
-            },
-            body: JSON.stringify({
-              ProductId: selectedItems[0]?.id,
-              UserId: 1, // Замените на реальный ID пользователя
-              StatusId: 1,
-              Amount: 1,
-            }),
-          }
+
+        // Создайте заказы для всех товаров
+        const orderResponses = await Promise.all(
+          selectedItems.map((item) =>
+            fetch("https://localhost:7000/api/Order/CreateOrder", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`,
+              },
+              body: JSON.stringify({
+                ProductId: item.id,
+                UserId: userId,
+                StatusId: 1,
+                Amount: 1,
+              }),
+            })
+          )
         );
 
-        if (!response.ok) {
-          throw new Error("Failed to create order");
-        }
-
-        const result = await response.json();
-        console.log("Order created:", result);
-
-        const deliveryResponse = await fetch(
-          "https://localhost:7000/api/Delivery/CreateDelivery",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${token}`,
-            },
-            body: JSON.stringify({
-              OrderId: result.id, // Используйте ID заказа, возвращенный из API
-              Address: formData.address,
-              Additionally: formData.additionalInfo,
-              Date: new Date().toISOString(), // Устанавливаем текущую дату
-            }),
-          }
+        // Получите все ID созданных заказов
+        const orderResults = await Promise.all(
+          orderResponses.map((res) => res.json())
         );
 
-        if (!deliveryResponse.ok) {
-          throw new Error("Failed to create delivery");
-        }
+        console.log("Orders created:", orderResults);
 
-        const deliveryResult = await deliveryResponse.json();
-        console.log("Delivery created:", deliveryResult);
+        // Создайте доставку для каждого заказа
+        const deliveryResponses = await Promise.all(
+          orderResults.map((order) =>
+            fetch("https://localhost:7000/api/Delivery/CreateDelivery", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`,
+              },
+              body: JSON.stringify({
+                orderId: order.Id,
+                statusId: order.StatusId,
+                Address: formData.address,
+                Additionally: formData.additionalInfo,
+                Date: new Date().toISOString(),
+              }),
+            })
+          )
+        );
+
+        const deliveryResults = await Promise.all(
+          deliveryResponses.map((res) => res.json())
+        );
+
+        console.log("Deliveries created:", deliveryResults);
 
         handleNextStep(); // Переход к следующему шагу
       } catch (error) {
         console.error("Error submitting order and delivery:", error);
       }
+    } else if (currentStep === 4) {
+      // Очистка корзины после завершения шага 4
+      clearCart();
     } else {
       handleNextStep(); // Переход к следующему шагу в других случаях
     }
