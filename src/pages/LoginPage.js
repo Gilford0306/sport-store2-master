@@ -70,7 +70,7 @@ function LoginPage() {
         <input
           type="text"
           placeholder="Логін"
-          className="email-input"
+          className="email-input-login"
           id="login"
           name="login"
           required
@@ -80,7 +80,7 @@ function LoginPage() {
         <input
           type="password"
           placeholder="Пароль"
-          className="email-input"
+          className="email-input-login"
           id="password"
           name="password"
           required
@@ -88,7 +88,9 @@ function LoginPage() {
           onChange={(e) => setPassword(e.target.value)}
         />
         <div className="button-container">
-          <button type="submit">Продовжити</button>
+          <button type="submit" className="continue-button">
+            Продовжити
+          </button>
         </div>
       </form>
     </div>

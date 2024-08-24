@@ -2,15 +2,15 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 50vh;  /* Takes up the full height of the viewport */
-  gap: 50px;      /* Space between the columns */
+  height: 50vh;
+  gap: 50px;
 }
 
 .form-left,
 .form-right {
   display: flex;
   flex-direction: column;
-  gap: 15px;      /* Space between input fields */
+  gap: 15px;
 }
 
 .form-center {
@@ -19,18 +19,10 @@
   align-items: center;
 }
 
-.form-group {
-  width: 250px;   /* Adjust width of input fields */
-}
-
-.form-group label {
-  margin-bottom: 5px;
-}
-
-.form-group input {
-  width: 100%;
-  padding: 10px;
-  box-sizing: border-box;
+.photo-upload {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .photo-upload img {
@@ -46,9 +38,9 @@
 }
 
 .form-save {
-  position: relative; 
-  right: -20px;  /* Adjust this value as needed */
-  top: 20px;     /* Adjust this value as needed */
+  position: relative;
+  right: -20px;
+  top: 20px;
 }
 
 .save-button {
@@ -58,4 +50,37 @@
   border: none;
   cursor: pointer;
   border-radius: 50px;
+}
+
+.profile-form-input input[type="text"],
+.profile-form-input input[type="email"],
+.profile-form-input input[type="tel"],
+.profile-form-input input[type="number"],
+.profile-form-input input[type="password"] {
+
+  padding: 10px;
+  font-size: 24px;
+  border: 1px solid #000;
+  border-radius: 8px;
+  box-sizing: border-box;
+  background-color: #f2f2f2;
+}
+
+.all-orders {
+  margin-top: 36px; /* Добавляем отступ сверху для кнопки всех заказов */
+  display: flex;
+  justify-content: center; /* Центрируем кнопку по горизонтали */
+}
+
+.all-orders-button {
+  background: #007bff; /* Синий цвет */
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+
+}
+
+.all-orders-button:hover {
+  background: #0056b3; /* Темно-синий цвет при наведении */
 }

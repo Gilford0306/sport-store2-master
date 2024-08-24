@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
-import { useCart } from '../components/contexts/CartContext'; // Подключение контекста корзины
+import React, { useState } from "react";
+import { useCart } from "../components/contexts/CartContext"; // Подключение контекста корзины
 
 function CheckoutPage() {
   const [step, setStep] = useState(1);
-  const [deliveryOption, setDeliveryOption] = useState('');
-  const [cardOption, setCardOption] = useState('');
-  const [creditCardNumber, setCreditCardNumber] = useState('');
-  const [cvvCode, setCvvCode] = useState('');
-  const [expirationDate, setExpirationDate] = useState('');
-  const { selectedItems } = useCart(); // Используем данные из контекста корзины
+  const [deliveryOption, setDeliveryOption] = useState("");
+  const [cardOption, setCardOption] = useState("");
+  const [creditCardNumber, setCreditCardNumber] = useState("");
+  const [cvvCode, setCvvCode] = useState("");
+  const [expirationDate, setExpirationDate] = useState("");
+  const { selectedItems } = useCart();
 
   const handleNextStep = (e) => {
     e.preventDefault();
@@ -25,29 +25,32 @@ function CheckoutPage() {
 
   const handleOrderSubmission = async () => {
     const order = {
-      ProductId: selectedItems.map(item => item.id),
+      ProductId: selectedItems.map((item) => item.id),
       StatusId: 1, // По умолчанию статус "в процессе" или другой начальный статус
-      Amount: selectedItems.reduce((total, item) => total + item.price * (item.quantity || 1), 0),
+      Amount: selectedItems.reduce(
+        (total, item) => total + item.price * (item.quantity || 1),
+        0
+      ),
     };
 
     try {
-      const response = await fetch('/api/Order/CreateOrder', {
-        method: 'POST',
+      const response = await fetch("/api/Order/CreateOrder", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(order),
       });
 
       if (response.ok) {
         const data = await response.json();
-        console.log('Order created:', data);
+        console.log("Order created:", data);
         setStep(4); // Переход на шаг 4
       } else {
-        console.error('Failed to create order');
+        console.error("Failed to create order");
       }
     } catch (error) {
-      console.error('Error:', error);
+      console.error("Error:", error);
     }
   };
 
@@ -70,7 +73,9 @@ function CheckoutPage() {
           <label htmlFor="phoneInput">Номер телефону:</label>
           <input type="tel" id="phoneInput" name="phone" required />
 
-          <button type="submit" className="continue-button-check">Продовжити</button>
+          <button type="submit" className="continue-button-check">
+            Продовжити
+          </button>
         </form>
       )}
 
@@ -110,10 +115,20 @@ function CheckoutPage() {
               </label>
 
               <label htmlFor="branchAddressInput">Місто та адреса:</label>
-              <input type="text" id="branchAddressInput" name="branchAddress" required />
+              <input
+                type="text"
+                id="branchAddressInput"
+                name="branchAddress"
+                required
+              />
 
               <label htmlFor="branchNumberInput">Номер відділення:</label>
-              <input type="text" id="branchNumberInput" name="branchNumber" required />
+              <input
+                type="text"
+                id="branchNumberInput"
+                name="branchNumber"
+                required
+              />
             </div>
           )}
 
@@ -123,16 +138,29 @@ function CheckoutPage() {
               <input type="text" id="countryInput" name="country" required />
 
               <label htmlFor="postalCodeInput">Поштовий Індекс:</label>
-              <input type="text" id="postalCodeInput" name="postalCode" required />
+              <input
+                type="text"
+                id="postalCodeInput"
+                name="postalCode"
+                required
+              />
             </div>
           )}
 
-          <button type="submit" className="continue-button-check">Продовжити</button>
+          <button type="submit" className="continue-button-check">
+            Продовжити
+          </button>
         </form>
       )}
 
       {step === 3 && (
-        <form onSubmit={(e) => { e.preventDefault(); handleOrderSubmission(); }} className="checkout-form">
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            handleOrderSubmission();
+          }}
+          className="checkout-form"
+        >
           <h2>Оплата</h2>
           <label>
             <input
@@ -185,7 +213,9 @@ function CheckoutPage() {
             required
           />
 
-          <button type="submit" className="submit-button-check">Замовити</button>
+          <button type="submit" className="submit-button-check">
+            Замовити
+          </button>
         </form>
       )}
 

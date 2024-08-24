@@ -1,10 +1,14 @@
 import React, { useState } from "react";
 import { useCart } from "../components/contexts/CartContext";
 import { useUser } from "../components/contexts/UserContext";
+import NewPost from "../components/assets/newPost.png";
+import UkrPost from "../components/assets/ukrPost.png";
+import Mag from "../components/assets/mag.png";
+import Box from "../components/assets/box.png";
 import "./OrderPage.css";
 
 const OrderPage = () => {
-  const { selectedItems, clearCart } = useCart();
+  const { selectedItems, clearCart, clearSelectedItems } = useCart();
   const { userId } = useUser();
   const [currentStep, setCurrentStep] = useState(1);
   const [isCashOnDelivery, setIsCashOnDelivery] = useState(false);
@@ -61,7 +65,7 @@ const OrderPage = () => {
                 body: JSON.stringify({
                   ProductId: item.id,
                   UserId: userId,
-                  StatusId: 1,
+                  StatusId: 2,
                   Amount: 1,
                 }),
               })
@@ -75,7 +79,41 @@ const OrderPage = () => {
 
           console.log("Orders created:", orderResults);
 
-          // Создайте доставку для каждого заказа
+          const updateResponses = await Promise.all(
+            selectedItems.map((item) =>
+              fetch(
+                `https://localhost:7000/api/Product/UpdateProductWithId${item.id}`,
+                {
+                  method: "PUT",
+                  headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`,
+                  },
+                  body: JSON.stringify({
+                    Id: item.id, // Id товара
+                    SubcathegoryId: item.SubcathegoryId,
+                    Name: item.name,
+                    CathegoryId: item.CathegoryId,
+                    Description: item.description,
+                    Price: item.price,
+                    Photos: item.photos || [],
+                    DiscountId: item.DiscountId,
+                    IsAvailable: false,
+                    CountryId: item.CountryId,
+                    BrandId: item.BrandId,
+                    GenderId: item.GenderId,
+                    SportId: item.SportId,
+                    ColorId: item.ColorId,
+                  }),
+                }
+              )
+            )
+          );
+          const updateResults = await Promise.all(
+            updateResponses.map((res) => res.json())
+          );
+          console.log("Products updated:", updateResults);
+
           const deliveryResponses = await Promise.all(
             orderResults.map((order) =>
               fetch("https://localhost:7000/api/Delivery/CreateDelivery", {
@@ -100,6 +138,8 @@ const OrderPage = () => {
 
           console.log("Deliveries created:", deliveryResults);
 
+          clearCart();
+          clearSelectedItems();
           setCurrentStep(4); // Переход к шагу 4
         } catch (error) {
           console.error("Error submitting order and delivery:", error);
@@ -123,21 +163,54 @@ const OrderPage = () => {
               body: JSON.stringify({
                 ProductId: item.id,
                 UserId: userId,
-                StatusId: 1,
+                StatusId: 2,
                 Amount: 1,
               }),
             })
           )
         );
 
-        // Получите все ID созданных заказов
         const orderResults = await Promise.all(
           orderResponses.map((res) => res.json())
         );
 
         console.log("Orders created:", orderResults);
 
-        // Создайте доставку для каждого заказа
+        const updateResponses = await Promise.all(
+          selectedItems.map((item) =>
+            fetch(
+              `https://localhost:7000/api/Product/UpdateProductWithId${item.id}`,
+              {
+                method: "PUT",
+                headers: {
+                  "Content-Type": "application/json",
+                  Authorization: `Bearer ${token}`,
+                },
+                body: JSON.stringify({
+                  Id: item.id, // Id товара
+                  SubcathegoryId: item.SubcathegoryId,
+                  Name: item.name,
+                  CathegoryId: item.CathegoryId,
+                  Description: item.description,
+                  Price: item.price,
+                  Photos: item.photos || [],
+                  DiscountId: item.DiscountId,
+                  IsAvailable: false,
+                  CountryId: item.CountryId,
+                  BrandId: item.BrandId,
+                  GenderId: item.GenderId,
+                  SportId: item.SportId,
+                  ColorId: item.ColorId,
+                }),
+              }
+            )
+          )
+        );
+        const updateResults = await Promise.all(
+          updateResponses.map((res) => res.json())
+        );
+        console.log("Products updated:", updateResults);
+
         const deliveryResponses = await Promise.all(
           orderResults.map((order) =>
             fetch("https://localhost:7000/api/Delivery/CreateDelivery", {
@@ -162,16 +235,16 @@ const OrderPage = () => {
         );
 
         console.log("Deliveries created:", deliveryResults);
-
+        clearCart();
+        clearSelectedItems();
+        console.log("clearCart:", selectedItems);
         handleNextStep(); // Переход к следующему шагу
       } catch (error) {
         console.error("Error submitting order and delivery:", error);
       }
     } else if (currentStep === 4) {
-      // Очистка корзины после завершения шага 4
-      clearCart();
     } else {
-      handleNextStep(); // Переход к следующему шагу в других случаях
+      handleNextStep();
     }
   };
 
@@ -181,8 +254,12 @@ const OrderPage = () => {
 
       {currentStep === 1 && (
         <div className="order-content">
-          <form className="user-data-form" onSubmit={handleSubmit}>
-            <div className="form-group">
+          <form
+            className="user-data-form order-page-inputs "
+            onSubmit={handleSubmit}
+          >
+            <h2>Введіть ваші данні</h2>
+            <div className="form-group-order">
               <input
                 type="text"
                 name="name"
@@ -192,7 +269,7 @@ const OrderPage = () => {
                 required
               />
             </div>
-            <div className="form-group">
+            <div className="form-group-order order-page-inputs">
               <input
                 type="text"
                 name="surname"
@@ -202,7 +279,7 @@ const OrderPage = () => {
                 required
               />
             </div>
-            <div className="form-group">
+            <div className="form-group-order order-page-inputs">
               <input
                 type="email"
                 name="email"
@@ -212,7 +289,7 @@ const OrderPage = () => {
                 required
               />
             </div>
-            <div className="form-group">
+            <div className="form-group-order order-page-inputs">
               <input
                 type="tel"
                 name="phone"
@@ -253,8 +330,8 @@ const OrderPage = () => {
           <form className="order-form" onSubmit={handleSubmit}>
             <div className="delivery-options">
               <h2>Варіанти доставки</h2>
-              <div className="option-group">
-                <label>
+              <div className="option-group order-page-inputs ">
+                <label className="radio-label">
                   <input
                     type="radio"
                     name="deliveryOption"
@@ -263,8 +340,9 @@ const OrderPage = () => {
                     onChange={handleInputChange}
                   />
                   Доставка в магазин
+                  <img src={Mag} alt="магазин" className="post-icon" />
                 </label>
-                <label>
+                <label className="radio-label">
                   <input
                     type="radio"
                     name="deliveryOption"
@@ -273,11 +351,49 @@ const OrderPage = () => {
                     onChange={handleInputChange}
                   />
                   Доставка у відділення
+                  <img src={Box} alt="коробка" className="post-icon" />
                 </label>
               </div>
 
-              <div className="option-group">
-                <label>
+              {formData.deliveryOption === "department" && (
+                <>
+                  <div className="option-group">
+                    <label className="radio-label post">
+                      <input
+                        type="radio"
+                        name="deliveryService"
+                        value="nova"
+                        checked={formData.deliveryService === "nova"}
+                        onChange={handleInputChange}
+                      />
+                      Нова пошта
+                      <img
+                        src={NewPost}
+                        alt="Нова пошта"
+                        className="post-icon"
+                      />
+                    </label>
+                    <label className="radio-label post">
+                      <input
+                        type="radio"
+                        name="deliveryService"
+                        value="ukr"
+                        checked={formData.deliveryService === "ukr"}
+                        onChange={handleInputChange}
+                      />
+                      Укр пошта
+                      <img
+                        src={UkrPost}
+                        alt="Укр пошта"
+                        className="post-icon"
+                      />
+                    </label>
+                  </div>
+                </>
+              )}
+
+              <div className="option-group order-page-inputs ">
+                <label className="checkbox-label">
                   <input
                     type="checkbox"
                     name="paymentOption"
@@ -288,27 +404,41 @@ const OrderPage = () => {
                 </label>
               </div>
 
-              <div className="address-group">
+              <div className="address-group order-page-inputs ">
                 <input
                   type="text"
                   name="address"
                   placeholder="Місто та адреса"
                   value={formData.address}
                   onChange={handleInputChange}
+                  className="input-field"
                 />
-                <input
-                  type="text"
-                  name="additionalInfo"
-                  placeholder="Додатково"
-                  value={formData.additionalInfo}
-                  onChange={handleInputChange}
-                />
+                {formData.deliveryOption === "department" ? (
+                  <input
+                    type="text"
+                    name="departmentNumber"
+                    placeholder="Номер відділення"
+                    value={formData.departmentNumber}
+                    onChange={handleInputChange}
+                    className="input-field"
+                  />
+                ) : (
+                  <input
+                    type="text"
+                    name="additionalInfo"
+                    placeholder="Додатково"
+                    value={formData.additionalInfo}
+                    onChange={handleInputChange}
+                    className="input-field"
+                  />
+                )}
                 <input
                   type="text"
                   name="country"
                   placeholder="Країна"
                   value={formData.country}
                   onChange={handleInputChange}
+                  className="input-field"
                 />
                 <input
                   type="text"
@@ -316,13 +446,15 @@ const OrderPage = () => {
                   placeholder="Поштовий індекс"
                   value={formData.postalCode}
                   onChange={handleInputChange}
+                  className="input-field"
                 />
               </div>
             </div>
-            <button type="submit" className="submit-form">
-              Продовжити
+            <button type="submit" className="submit-form-order">
+              Замовити
             </button>
           </form>
+
           <div className="selected-items">
             <h2>Обрані товари</h2>
             {selectedItems.length > 0 ? (
@@ -348,8 +480,7 @@ const OrderPage = () => {
       {currentStep === 3 && !isCashOnDelivery && (
         <div className="centered-content">
           <form className="payment-form" onSubmit={handleSubmit}>
-            <h2>Оформлення замовлення</h2>
-            <div className="form-group">
+            <div className="form-group-order-inline order-page-inputs">
               <label>
                 <input
                   type="radio"
@@ -360,8 +491,6 @@ const OrderPage = () => {
                 />
                 Visa
               </label>
-            </div>
-            <div className="form-group">
               <label>
                 <input
                   type="radio"
@@ -373,7 +502,7 @@ const OrderPage = () => {
                 MasterCard
               </label>
             </div>
-            <div className="form-group">
+            <div className="form-group-order order-page-inputs">
               <input
                 type="text"
                 name="cardNumber"
@@ -383,7 +512,7 @@ const OrderPage = () => {
                 required
               />
             </div>
-            <div className="form-group">
+            <div className="form-group-order order-page-inputs">
               <input
                 type="text"
                 name="cw2"
@@ -393,7 +522,7 @@ const OrderPage = () => {
                 required
               />
             </div>
-            <div className="form-group">
+            <div className="form-group-order order-page-inputs">
               <input
                 type="text"
                 name="expiryDate"
@@ -403,7 +532,7 @@ const OrderPage = () => {
                 required
               />
             </div>
-            <div className="form-group">
+            <div className="form-group-order order-page-inputs">
               <input
                 type="text"
                 name="billingAddress"

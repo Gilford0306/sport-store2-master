@@ -82,6 +82,13 @@ export function CartProvider({ children }) {
     }
   };
 
+  const clearSelectedItems = () => {
+    setSelectedItems([]);
+    if (userId) {
+      localStorage.removeItem(`selectedItems-${userId}`);
+    }
+  };
+
   return (
     <CartContext.Provider
       value={{
@@ -92,6 +99,7 @@ export function CartProvider({ children }) {
         updateItemChecked,
         setUser,
         clearCart,
+        clearSelectedItems,
       }}
     >
       {children}

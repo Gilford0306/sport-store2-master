@@ -17,6 +17,7 @@ function StorePage({ products }) {
     priceRange: [],
     brand: [],
     sport: [],
+    isAvailable: [],
   });
 
   // Проверяем наличие параметра gender в URL и обновляем фильтры при загрузке страницы
@@ -62,8 +63,9 @@ function StorePage({ products }) {
       const matchesBrand =
         filters.brand.length === 0 || filters.brand.includes(product.brand);
       const matchesSport =
-        filters.sport.length === 0 ||
-        filters.sport.includes(product.sport);
+        filters.sport.length === 0 || filters.sport.includes(product.sport);
+
+      const isAvailable = product.isAvailable === true;
 
       return (
         matchesCategory &&
@@ -72,11 +74,12 @@ function StorePage({ products }) {
         matchesColor &&
         matchesPrice &&
         matchesBrand &&
-        matchesSport
+        matchesSport &&
+        isAvailable
       );
     });
   }, [products, filters]);
-      console.log(filteredProducts);
+  console.log(filteredProducts);
 
   return (
     <div className="product-page">

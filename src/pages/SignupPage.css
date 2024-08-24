@@ -32,8 +32,8 @@
 }
 
 .form-group-sing input[type="text"],
-.form-group-sing  input[type="password"],
-.form-group-sing  input[type="date"] {
+.form-group-sing input[type="password"],
+.form-group-sing input[type="date"] {
   width: 100%;
   padding: 10px;
   font-size: 16px;

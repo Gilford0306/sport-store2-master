@@ -4,7 +4,7 @@ import logo from "../assets/Logo-05.png";
 import { useNavigate } from "react-router-dom";
 import NavigationBar from "../NavigationBar/NavigationBar";
 import Button from "../Button/Button";
-import group164 from "../assets/Group 164.png";
+import group165 from "../assets/Ellipse9.png";
 import { UserContext } from "../contexts/UserContext";
 import { useFavorites } from "../contexts/FavoritesContext";
 import { useCart } from "../contexts/CartContext";
@@ -53,7 +53,7 @@ const Header = () => {
               />
             </div>
             <div className="user-profile" onClick={handleProfileClick}>
-              <img src={group164} alt="User" className="profile-img" />
+              <img src={group165} alt="User" className="profile-img" />
               <span className="user-name">
                 {userProfile.username || "User"}
               </span>

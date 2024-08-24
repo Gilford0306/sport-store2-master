@@ -18,7 +18,8 @@ import MapPage from "./pages/MapPage";
 import HelpPage from "./pages/HelpPage";
 import GiftCardPage from "./pages/GiftCardPage";
 import OrderPage from "./pages/OrderPage";
-
+import AllOrdersPage from "./pages/AllOrdersPage";
+import AddProductPage from "./pages/AddProductPage";
 import { CartProvider } from "./components/contexts/CartContext";
 import { UserProvider } from "./components/contexts/UserContext";
 import { ProductProvider } from "./components/contexts/ProductContext";
@@ -28,6 +29,7 @@ import "./styles/global.css";
 
 function App() {
   const [products, setProducts] = useState([]);
+  const [statuses, setStatuses] = useState([]);
   const [brands, setBrands] = useState([]);
   const [colors, setColors] = useState([]);
   const [cathegories, setCathegories] = useState([]);
@@ -37,7 +39,13 @@ function App() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // Получаем все бренды
+        const statusesResponse = await fetch(
+          "https://localhost:7000/api/Order/GetAllStatuses"
+        );
+        const statusesData = await statusesResponse.json();
+        setStatuses(statusesData);
+        console.log(statusesData);
+
         const brandsResponse = await fetch(
           "https://localhost:7000/api/Product/GetAllItemsFromUniversalClass?classtype=Brand"
         );
@@ -133,6 +141,14 @@ function App() {
             color: color ? color.Name : "Unknown",
             sport: sport ? sport.Name : "Unknown",
             isAvailable: product.isAvailable,
+            SubcathegoryId: product.SubcathegoryId,
+            CathegoryId: product.CathegoryId,
+            DiscountId: product.DiscountId,
+            CountryId: product.CountryId,
+            BrandId: product.BrandId,
+            GenderId: product.GenderId,
+            SportId: product.SportId,
+            ColorId: product.ColorId,
           };
         });
 
@@ -181,6 +197,16 @@ function App() {
                       <Route path="/map" element={<MapPage />} />
                       <Route path="/gift" element={<GiftCardPage />} />
                       <Route path="/order" element={<OrderPage />} />
+                      <Route
+                        path="/all-orders"
+                        element={
+                          <AllOrdersPage
+                            products={products}
+                            statuses={statuses}
+                          />
+                        }
+                      />
+                      <Route path="/add-product" element={<AddProductPage />} />
                     </Routes>
                   </main>
                 </div>

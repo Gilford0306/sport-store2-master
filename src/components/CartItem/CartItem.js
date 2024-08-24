@@ -1,5 +1,5 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom"; // Убедитесь, что импортировали useNavigate
 import { useCart } from "../contexts/CartContext";
 import IconButton from "../IconButton/IconButton";
 import ProductImage from "../ProductImage/ProductImage";
@@ -7,10 +7,22 @@ import ProductDescription from "../ProductDescription/ProductDescription";
 import "./CartItem.css";
 
 function CartItem({ item }) {
-  const { removeFromCart, updateItemChecked } = useCart();
-  const navigate = useNavigate();
-  const [isChecked, setIsChecked] = React.useState(false);
+  const { removeFromCart, updateItemChecked, selectedItems } = useCart();
+  const navigate = useNavigate(); // Инициализируйте navigate
 
+  // Определите состояние чекбокса
+  const [isChecked, setIsChecked] = React.useState(
+    selectedItems.some((selectedItem) => selectedItem.id === item.id)
+  );
+
+  // Обновление состояния чекбокса при изменении selectedItems
+  React.useEffect(() => {
+    setIsChecked(
+      selectedItems.some((selectedItem) => selectedItem.id === item.id)
+    );
+  }, [selectedItems, item.id]);
+
+  // Функция для удаления товара
   const handleRemove = () => {
     removeFromCart(item.id);
     if (isChecked) {
@@ -18,15 +30,17 @@ function CartItem({ item }) {
     }
   };
 
+  // Функция для изменения состояния чекбокса
   const handleCheckboxChange = () => {
     const newCheckedState = !isChecked;
     setIsChecked(newCheckedState);
     updateItemChecked(item.id, newCheckedState);
   };
 
+  // Функция для обработки клика на описание товара
   const handleDescriptionClick = (event) => {
     event.stopPropagation();
-    navigate(`/product/${item.id}`);
+    navigate(`/product/${item.id}`); // Используйте navigate для перехода
   };
 
   return (
@@ -46,11 +60,13 @@ function CartItem({ item }) {
           alt={item.name}
           className="product-image"
         />
-        <div
-          className="product-description"
-          onClick={handleDescriptionClick} 
-        >
-          <ProductDescription name={item.name} gender={item.gender} subcategory={item.subcategory} description={item.brand}/>
+        <div className="product-description" onClick={handleDescriptionClick}>
+          <ProductDescription
+            name={item.name}
+            gender={item.gender}
+            subcategory={item.subcategory}
+            description={item.brand}
+          />
         </div>
       </div>
       <div className="item-price">
@@ -58,6 +74,7 @@ function CartItem({ item }) {
         <p className="price-value">{item.price} грн</p>
       </div>
       <IconButton
+        color="grey"
         icon="trash"
         size="20px"
         onClick={(e) => {

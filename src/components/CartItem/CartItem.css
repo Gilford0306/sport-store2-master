@@ -39,11 +39,11 @@
 }
 
 .price-label {
-  margin: 0; /* Убирает отступы по умолчанию у <p> */
+  margin: 0; 
 }
 
 .price-value {
-  margin: 0; /* Убирает отступы по умолчанию у <p> */
+  margin: 0; 
   font-weight: bold;
 }
 
@@ -54,10 +54,10 @@
 }
 
 .icon-button i {
-  color: grey; /* Пример стилизации иконки */
+
   transition: transform 0.2s;
 }
 
 .icon-button:hover i {
-  transform: scale(1.2); /* Увеличение при наведении */
+  transform: scale(1.2); 
 }

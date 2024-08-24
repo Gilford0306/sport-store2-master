@@ -28,6 +28,7 @@
 }
 
 .logo {
+  margin-top: 10px;;
   margin-bottom: 20px; /* Отступ между логотипом и навигацией */
   margin-right: 100px;
 }

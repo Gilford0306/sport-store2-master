@@ -1,12 +1,16 @@
+// UserProfilePage.jsx
 import React, { useContext, useEffect, useState } from "react";
 import "./UserProfilePage.css";
 import { UserContext } from "../components/contexts/UserContext";
 import axios from "axios";
+import DeafaultPhoto from "../components/assets/Ellipse9.png";
+import { useNavigate } from "react-router-dom";
 
 function UserProfilePage() {
-  const { userProfile, loadUserProfile } = useContext(UserContext); // Предполагаем, что токен хранится в UserContext
+  const { userProfile, loadUserProfile } = useContext(UserContext);
   const [profileData, setProfileData] = useState(userProfile || {});
   const [isEditing, setIsEditing] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (!userProfile) {
@@ -34,16 +38,20 @@ function UserProfilePage() {
         profileData,
         {
           headers: {
-            Authorization: `Bearer ${token}`, // Добавляем токен в заголовок
+            Authorization: `Bearer ${token}`,
           },
         }
       );
       console.log(response.data);
       setIsEditing(false);
-      loadUserProfile(); // Перезагрузить профиль, чтобы отобразить обновленные данные
+      loadUserProfile();
     } catch (error) {
       console.error("Error updating profile", error);
     }
+  };
+
+  const handleAllOrders = () => {
+    navigate("/all-orders");
   };
 
   return (
@@ -52,6 +60,7 @@ function UserProfilePage() {
         <div className="form-group">
           <label>Ім’я</label>
           <input
+            className="profile-form-input"
             type="text"
             name="firstName"
             placeholder="Ім’я"
@@ -97,12 +106,9 @@ function UserProfilePage() {
         </div>
       </div>
       <div className="form-center">
-        <div className="form-group photo-upload">
-          <img
-            src={profileData?.photo || "path_to_default_photo"}
-            alt="profile"
-          />
-          <button>Змінити фото</button>
+        <div className="photo-upload">
+          <img src={DeafaultPhoto} alt="profile" />
+          <button className="save-button">Змінити фото</button>
         </div>
       </div>
       <div className="form-save">
@@ -111,10 +117,19 @@ function UserProfilePage() {
             Зберегти
           </button>
         ) : (
-          <button className="edit-button" onClick={() => setIsEditing(true)}>
+          <button
+            className="edit-button save-button"
+            onClick={() => setIsEditing(true)}
+          >
             Редагувати
           </button>
         )}
+      </div>
+
+      <div className="all-orders">
+        <button className=" save-button" onClick={handleAllOrders}>
+          Переглянути всі замовлення
+        </button>
       </div>
     </div>
   );

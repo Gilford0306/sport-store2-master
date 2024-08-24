@@ -10,62 +10,59 @@
   padding: 20px;
 }
 
+.header-gift {
+  color: white;
+  font-family: Jura;
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 37.86px;
+  text-align: left;
+  margin-left: 50px;
+}
+
 .gift-card-container {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   margin-top: 20px;
+  gap: 20px; 
 }
 
-.purchase-section {
-  margin-left: 20px;
-  background-color: #f0f0f0;
-  padding: 20px;
-  border-radius: 10px;
+.gift1-container {
+  width: 565px;
+  height: 298px;
+  border-radius: 20px 0px 0px 0px;
+  overflow: hidden;
+  margin-right: 100px;
 }
 
-.form-group {
-  margin: 15px 0;
+.gift1-image {
+  width: 100%;
+  height: 100%;
+  border-radius: 20px 0px 0px 0px;
 }
 
-.amount-section {
-  margin: 15px 0;
-}
-
-.amount-buttons {
+.buttons-container {
   display: flex;
-  gap: 10px;
-  margin-top: 10px;
+  flex-direction: column;
+  gap: 10px; /* Отступ между кнопками */
+  margin-top: 150px;;
+  margin-left: 50px;
 }
 
-.amount-buttons button {
+.send-card-button,
+.email-card-button {
   padding: 10px 20px;
-  background-color: #e0e0e0;
-  border: none;
   border-radius: 5px;
+  background-color: #007bff;
+  color: white;
+  border: none;
   cursor: pointer;
 }
 
-.amount-buttons .selected {
-  background-color: #3b5998;
-  color: white;
-}
-
-.add-to-cart-button {
-  background-color: #3b5998;
-  color: white;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.description-section {
-  margin-top: 40px;
-  padding: 20px;
-  background-color: white;
-  border-radius: 10px;
-  text-align: center;
+.send-card-button:hover,
+.email-card-button:hover {
+  background-color: #0056b3;
 }
 
 .styles-section {
@@ -73,8 +70,80 @@
   text-align: center;
 }
 
-.other-cards {
+.other-cards-container {
   display: flex;
-  justify-content: center;
+  overflow-x: auto;
   gap: 20px;
+  padding: 20px;
+  scroll-snap-type: x mandatory;
+}
+
+.other-cards-container::-webkit-scrollbar {
+  height: 8px; /* Высота скроллбара */
+}
+
+.other-cards-container::-webkit-scrollbar-thumb {
+  background-color: #ccc; 
+  border-radius: 4px; 
+}
+
+.other-cards-container::-webkit-scrollbar-track {
+  background-color: #f1f1f1; 
+}
+
+.other-card {
+  flex: 0 0 auto;
+  width: 565px; 
+  height: 298px; 
+  border-radius: 10px;
+  scroll-snap-align: center;
+}
+
+.send-card-button,
+.email-card-button {
+  display: inline-block;
+  width: 300px;
+  padding: 15px 20px;
+  border-radius: 50px; 
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  font-family: 'Arial', sans-serif; 
+  font-weight: bold;
+  text-align: center;
+  transition: background-color 0.3s, transform 0.3s; 
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2); 
+  font-family: Jura;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 18.93px;
+  text-align: center;
+}
+
+.send-card-button {
+  background-color: #FFC700;
+  color: #333; 
+  margin-bottom: 20px;
+}
+
+.send-card-button:hover {
+  background-color: #ffb300; 
+  transform: translateY(-2px); 
+}
+
+.email-card-button {
+  background-color: #4748FF;
+  color: white; 
+}
+
+.email-card-button:hover {
+  background-color: #2d4373; 
+  transform: translateY(-2px); 
+}
+
+.other-card img {
+  width: 565px;
+  height: 298px;
+  object-fit: cover; 
+  border-radius: 10px; 
 }

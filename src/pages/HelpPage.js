@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 const HelpPage = () => {
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState("");
 
   const handleInputChange = (event) => {
     setSearchQuery(event.target.value);
@@ -25,33 +25,33 @@ const HelpPage = () => {
 
 const styles = {
   container: {
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: '100vh',
-    backgroundColor: '#fff',
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+    height: "50vh",
+    backgroundColor: "#fff",
   },
   header: {
-    fontSize: '24px',
-    marginBottom: '20px',
-    fontFamily: 'Arial, sans-serif',
-    fontWeight: 'bold',
+    fontSize: "24px",
+    marginBottom: "20px",
+    fontFamily: "Arial, sans-serif",
+    fontWeight: "bold",
   },
   searchContainer: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    border: '1px solid #ccc',
-    borderRadius: '25px',
-    padding: '5px 10px',
-    width: '300px',
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    border: "1px solid #ccc",
+    borderRadius: "25px",
+    padding: "5px 10px",
+    width: "300px",
   },
   searchInput: {
-    border: 'none',
-    outline: 'none',
-    fontSize: '16px',
-    width: '100%',
+    border: "none",
+    outline: "none",
+    fontSize: "16px",
+    width: "100%",
   },
 };
 
