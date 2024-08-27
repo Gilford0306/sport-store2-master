@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import "./AddProductPage.css"; // Import the CSS file
+import "./AddProductPage.css"; 
 
 const AddProductPage = () => {
   const [categories, setCategories] = useState([]);
@@ -62,38 +62,56 @@ const AddProductPage = () => {
     });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const token = localStorage.getItem("token");
+const handleSubmit = (e) => {
+  e.preventDefault();
+  const token = localStorage.getItem("token");
 
-    axios
-      .post("https://localhost:7000/api/Product/AddNewProduct", form, {
-        headers: {
-          Authorization: ` ${token}`,
-        },
-      })
-      .then((response) => {
-        alert("Product added successfully!");
-        setForm({
-          Name: "",
-          Description: "",
-          Price: "",
-          IsAvailable: true,
-          CategoryId: "",
-          SubcategoryId: "",
-          BrandId: "",
-          ColorId: "",
-          GenderId: "",
-          SportId: "",
-          DiscountId: "",
-          CountryId: "",
-        });
-      })
-      .catch((error) => {
-        alert("Failed to add product.");
-        console.error(error.response.data);
-      });
+
+  const productData = {
+    subcathegoryId: form.SubcategoryId,
+    name: form.Name,
+    cathegoryId: form.CategoryId,
+    description: form.Description,
+    price: parseFloat(form.Price), 
+    photos: [], 
+    listOfSizes: [], 
+    discountId: form.DiscountId || null,
+    isAvailable: form.IsAvailable,
+    countryId: form.CountryId,
+    brandId: form.BrandId,
+    genderId: form.GenderId,
+    sportId: form.SportId,
+    colorId: form.ColorId,
   };
+
+  axios
+    .post("https://localhost:7000/api/Product/AddNewProduct", productData, {
+      headers: {
+        Authorization: `Bearer ${token}`, 
+      },
+    })
+    .then((response) => {
+      alert("Product added successfully!");
+      setForm({
+        Name: "",
+        Description: "",
+        Price: "",
+        IsAvailable: true,
+        CategoryId: "",
+        SubcategoryId: "",
+        BrandId: "",
+        ColorId: "",
+        GenderId: "",
+        SportId: "",
+        DiscountId: "",
+        CountryId: "",
+      });
+    })
+    .catch((error) => {
+      alert("Failed to add product.");
+      console.error(error.response.data);
+    });
+};
 
   return (
     <div className="add-product-container">

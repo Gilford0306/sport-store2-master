@@ -7,7 +7,7 @@
 
 .add-product-title {
   margin-bottom: 20px;
-  font-size: 24px;
+  font-size: 50px;
   font-weight: bold;
 }
 
@@ -30,6 +30,7 @@
 .add-product-label-sport,
 .add-product-label-available {
   margin-bottom: 10px;
+  font-size: 18px;
   width: 100%;
 }
 

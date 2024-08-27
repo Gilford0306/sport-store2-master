@@ -8,7 +8,9 @@ function CartSummary() {
   const [totalCost, setTotalCost] = useState(0);
   const [deliveryCost, setDeliveryCost] = useState(0);
   const [totalAmount, setTotalAmount] = useState(0);
-  const [allSelected, setAllSelected] = useState(false); // Добавляем состояние для отслеживания выбора всех чекбоксов
+  const [allSelected, setAllSelected] = useState(false); 
+  const [promoCode, setPromoCode] = useState(""); // Состояние для промокода
+  const [discountApplied, setDiscountApplied] = useState(false); // Состояние для отслеживания применения скидки
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -20,16 +22,21 @@ function CartSummary() {
       const delivery = total > 0 && total < 3000 ? 200 : 0;
       setDeliveryCost(delivery);
 
-      setTotalAmount(total + delivery);
+      let amount = total + delivery;
+      if (discountApplied) {
+        amount -= 100; // Применение скидки
+      }
+      setTotalAmount(Math.max(amount, 0)); // Убедиться, что сумма не отрицательная
     };
 
     calculateTotals();
-  }, [selectedItems]);
+  }, [selectedItems, discountApplied]);
 
   useEffect(() => {
     setTotalCost(0);
     setDeliveryCost(0);
     setTotalAmount(0);
+    setDiscountApplied(false); // Сброс скидки при изменении пути
 
     localStorage.removeItem("cartItems");
   }, [location.pathname]);
@@ -47,6 +54,18 @@ function CartSummary() {
     });
   };
 
+  const handlePromoCodeChange = (event) => {
+    setPromoCode(event.target.value);
+  };
+
+  const applyPromoCode = () => {
+    if (promoCode === "111") {
+      setDiscountApplied(true);
+    } else {
+      setDiscountApplied(false);
+    }
+  };
+
   return (
     <div className="cart-summary">
       <button
@@ -60,23 +79,32 @@ function CartSummary() {
         onClick={handleSelectAll}
       >
         {allSelected ? "Зняти виділення" : "Обрати все"}{" "}
-        {/* Меняем текст кнопки */}
       </button>
 
       <div className="cart-summary__promo">
         <label>У вас є промокод?</label>
         <div className="cart-summary__promo-input">
-          <input type="text" placeholder="Введіть промокод" />
-          <button className="apply-promo">Застосувати</button>
+          <input
+            type="text"
+            placeholder="Введіть промокод"
+            value={promoCode}
+            onChange={handlePromoCodeChange}
+          />
+          <button
+            className="apply-promo"
+            onClick={applyPromoCode}
+          >
+            Застосувати
+          </button>
         </div>
       </div>
 
       <div className="cart-summary__totals">
         <div>
-          Вартість доставки: <span>{totalCost} грн</span>
+          Вартість доставки: <span>{deliveryCost} грн</span>
         </div>
         <div>
-          Вартість товарів: <span>{deliveryCost} грн</span>
+          Вартість товарів: <span>{totalCost} грн</span>
         </div>
         <hr />
         <div>

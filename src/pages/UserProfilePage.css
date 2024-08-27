@@ -84,3 +84,65 @@
 .all-orders-button:hover {
   background: #0056b3; /* Темно-синий цвет при наведении */
 }
+
+.admin-actions {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+}
+
+.add-product-button,
+.add-color-button {
+  margin-bottom: 10px;
+}
+
+.color-form {
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+}
+
+.color-form input {
+  margin-bottom: 10px;
+}
+.admin-actions {
+  margin-top: 20px;
+}
+
+.add-product-button,
+.add-color-button,
+.add-country-button,
+.add-category-button,
+.add-brand-button,
+.add-gender-button,
+.add-sport-button {
+  display: block;
+  margin: 10px 0;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border: none;
+  background-color: #007bff;
+  color: white;
+  border-radius: 5px;
+}
+
+.item-form {
+  margin-top: 10px;
+}
+
+.item-form input {
+  margin-right: 10px;
+  padding: 5px;
+  font-size: 14px;
+}
+
+.item-form button {
+  padding: 5px 10px;
+  font-size: 14px;
+  cursor: pointer;
+  border: none;
+  background-color: #28a745;
+  color: white;
+  border-radius: 5px;
+}

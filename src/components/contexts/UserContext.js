@@ -15,7 +15,18 @@ export const UserProvider = ({ children }) => {
     const savedUserId = localStorage.getItem("userId");
 
     if (savedProfile) {
-      setUserProfile(JSON.parse(savedProfile));
+      const profile = JSON.parse(savedProfile);
+      // Преобразуйте профиль, если это необходимо
+      setUserProfile({
+        id: profile.id,
+        userName: profile.userName,
+        email: profile.email,
+        roles: profile.roles,
+        firstName: profile.firstName,
+        lastName: profile.lastName,
+        birthdate: profile.birthdate,  // Исправлено в соответствии с правильным именем поля
+        phoneNumber: profile.phoneNumber,
+      });
       if (savedUserId) {
         setCartUser(savedUserId);
         setFavoritesUser(savedUserId);
@@ -56,6 +67,7 @@ export const UserProvider = ({ children }) => {
         logout,
         loadUserProfile,
         userId: userProfile?.id,
+        userRole: userProfile?.roles[0],
       }}
     >
       {children}

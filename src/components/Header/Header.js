@@ -55,7 +55,7 @@ const Header = () => {
             <div className="user-profile" onClick={handleProfileClick}>
               <img src={group165} alt="User" className="profile-img" />
               <span className="user-name">
-                {userProfile.username || "User"}
+                {userProfile.lastName || "User"}
               </span>
             </div>
             <button onClick={handleLogout}>Вийти</button>

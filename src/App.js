@@ -119,7 +119,7 @@ function App() {
           const color = colorsData.find((c) => c.Id === product.ColorId);
           const category = cathegoriesData.find(
             (b) => b.Id === product.CathegoryId
-          ); // Находим категорию по Id
+          ); 
           const subcategory = subcathegoriesData.find(
             (b) => b.Id === product.SubcathegoryId
           );
@@ -159,7 +159,7 @@ function App() {
     };
 
     fetchData();
-  }, []); // Пустой массив зависимостей означает, что useEffect будет вызван только один раз при монтировании компонента
+  }, []); 
 
   return (
     <CartProvider>
