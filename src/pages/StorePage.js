@@ -20,7 +20,7 @@ function StorePage({ products }) {
     isAvailable: [],
   });
 
-  // Проверяем наличие параметра gender в URL и обновляем фильтры при загрузке страницы
+
   useEffect(() => {
     const params = new URLSearchParams(location.search);
     const genderFilter = params.get("gender");
@@ -28,7 +28,7 @@ function StorePage({ products }) {
     if (genderFilter && !filters.gender.includes(genderFilter)) {
       setFilters((prevFilters) => ({
         ...prevFilters,
-        gender: [genderFilter], // Устанавливаем фильтр по полу
+        gender: [genderFilter], 
       }));
     }
   }, [location, filters.gender]);

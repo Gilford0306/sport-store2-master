@@ -1,22 +1,24 @@
 import React, { createContext, useState, useContext, useEffect } from "react";
 import { useCart } from "./CartContext";
 import { useFavorites } from "./FavoritesContext";
+import defaultPhoto from "../assets/Ellipse9.png"; 
+import API_BASE_URL from "../../services/api";
 
 export const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
   const [userProfile, setUserProfile] = useState(null);
+  const [userPhoto, setUserPhoto] = useState(null); // Состояние для фото
+
   const { setUser: setCartUser } = useCart();
   const { setUser: setFavoritesUser } = useFavorites();
 
-  // Функция для загрузки профиля пользователя
-  const loadUserProfile = () => {
+  const loadUserProfile = async () => {
     const savedProfile = localStorage.getItem("userProfile");
     const savedUserId = localStorage.getItem("userId");
 
     if (savedProfile) {
       const profile = JSON.parse(savedProfile);
-      // Преобразуйте профиль, если это необходимо
       setUserProfile({
         id: profile.id,
         userName: profile.userName,
@@ -24,9 +26,35 @@ export const UserProvider = ({ children }) => {
         roles: profile.roles,
         firstName: profile.firstName,
         lastName: profile.lastName,
-        birthdate: profile.birthdate,  // Исправлено в соответствии с правильным именем поля
+        birthdate: profile.birthdate,
         phoneNumber: profile.phoneNumber,
       });
+
+      const token = localStorage.getItem("token");
+      try {
+        const response = await fetch(`${API_BASE_URL}/Auth/GetProfilePhoto`, {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        if (response.ok) {
+          const data = await response.json();
+          if (data && data.FileContents) {
+            const base64String = data.FileContents;
+            const photoUrl = `data:image/png;base64,${base64String}`;
+            setUserPhoto(photoUrl);
+          } else {
+            setUserPhoto(null); 
+          }
+        } else {
+          setUserPhoto(null);
+        }
+      } catch (error) {
+        console.error("Error fetching profile photo:", error);
+        setUserPhoto(null); 
+      }
+
       if (savedUserId) {
         setCartUser(savedUserId);
         setFavoritesUser(savedUserId);
@@ -35,11 +63,12 @@ export const UserProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    loadUserProfile(); // Загрузка профиля при монтировании компонента
+    loadUserProfile();
   }, [setCartUser, setFavoritesUser]);
 
   const logout = () => {
     setUserProfile(null);
+    setUserPhoto(null); // Очистка фото при выходе
     localStorage.removeItem("userProfile");
     localStorage.removeItem("token");
     localStorage.removeItem("refreshToken");
@@ -63,6 +92,7 @@ export const UserProvider = ({ children }) => {
     <UserContext.Provider
       value={{
         userProfile,
+        userPhoto: userPhoto || defaultPhoto, // Используем дефолтное фото, если пользовательское фото отсутствует
         login,
         logout,
         loadUserProfile,

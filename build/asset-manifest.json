@@ -1,0 +1,40 @@
+{
+  "files": {
+    "main.css": "/sport-store2-master/static/css/main.9c88cfe4.css",
+    "main.js": "/sport-store2-master/static/js/main.582bd99e.js",
+    "static/media/Frame 80.svg": "/sport-store2-master/static/media/Frame 80.e2b38e196dab763a2f9d77f8203a7e10.svg",
+    "static/media/Frame 82.svg": "/sport-store2-master/static/media/Frame 82.77f0609417977a9e059a38f6a0fc8822.svg",
+    "static/media/Frame 81.svg": "/sport-store2-master/static/media/Frame 81.66bc37954bf0f769738110c94070fb8e.svg",
+    "static/media/Inter-VariableFont_slnt,wght.ttf": "/sport-store2-master/static/media/Inter-VariableFont_slnt,wght.853e01975d2783d9fa29.ttf",
+    "static/media/Accessories.jpg": "/sport-store2-master/static/media/Accessories.cf1d0a43ab12bca5567f.jpg",
+    "static/media/fa-solid-900.ttf": "/sport-store2-master/static/media/fa-solid-900.07ed6d5fa32c1d54af0f.ttf",
+    "static/media/hero-image-copy.jpg": "/sport-store2-master/static/media/hero-image-copy.42748a242dd9994247ae.jpg",
+    "static/media/Footwear.jpg": "/sport-store2-master/static/media/Footwear.9cbc654c1683aa4c3ece.jpg",
+    "static/media/Jura-VariableFont_wght.ttf": "/sport-store2-master/static/media/Jura-VariableFont_wght.f4ba69633efd54401550.ttf",
+    "static/media/fa-brands-400.ttf": "/sport-store2-master/static/media/fa-brands-400.0ff70dcbf135d859ebf3.ttf",
+    "static/media/Clothing.jpg": "/sport-store2-master/static/media/Clothing.4d04e96ac0bbf3897429.jpg",
+    "static/media/fa-solid-900.woff2": "/sport-store2-master/static/media/fa-solid-900.93f719f4d62bfa3e748c.woff2",
+    "static/media/fa-brands-400.woff2": "/sport-store2-master/static/media/fa-brands-400.bb8d5a145e22822103fb.woff2",
+    "static/media/Gift1.png": "/sport-store2-master/static/media/Gift1.bcb69017c2448fc5837b.png",
+    "static/media/Frame5.png": "/sport-store2-master/static/media/Frame5.053cc49f45fd40df5c20.png",
+    "static/media/Frame1.png": "/sport-store2-master/static/media/Frame1.c64ebe49d6e9b7ca0d6c.png",
+    "static/media/Frame6.png": "/sport-store2-master/static/media/Frame6.92a072245f956b1f364d.png",
+    "static/media/Frame2.png": "/sport-store2-master/static/media/Frame2.e644307eeb54454c6ec0.png",
+    "static/media/fa-regular-400.ttf": "/sport-store2-master/static/media/fa-regular-400.17a6e1aebccdbaa39e78.ttf",
+    "static/media/Ellipse9.png": "/sport-store2-master/static/media/Ellipse9.e37200ccac49f9b7f4ba.png",
+    "static/media/Frame4.png": "/sport-store2-master/static/media/Frame4.a5603a8f928c55de5db5.png",
+    "static/media/Gift3.png": "/sport-store2-master/static/media/Gift3.547b67a138a8b19afbcd.png",
+    "static/media/Gift2.png": "/sport-store2-master/static/media/Gift2.5a0ea9d9ce50ff14dd25.png",
+    "static/media/Frame3.png": "/sport-store2-master/static/media/Frame3.7b0aeace871bbecb687b.png",
+    "static/media/fa-regular-400.woff2": "/sport-store2-master/static/media/fa-regular-400.bc3722686635b5f86132.woff2",
+    "static/media/fa-v4compatibility.ttf": "/sport-store2-master/static/media/fa-v4compatibility.0f6cb412603527bda691.ttf",
+    "static/media/fa-v4compatibility.woff2": "/sport-store2-master/static/media/fa-v4compatibility.6cfec8414be20e2c3426.woff2",
+    "index.html": "/sport-store2-master/index.html",
+    "main.9c88cfe4.css.map": "/sport-store2-master/static/css/main.9c88cfe4.css.map",
+    "main.582bd99e.js.map": "/sport-store2-master/static/js/main.582bd99e.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.9c88cfe4.css",
+    "static/js/main.582bd99e.js"
+  ]
+}

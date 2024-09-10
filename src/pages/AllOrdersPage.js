@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import "./AllOrdersPage.css"; // Подключите CSS стили для страницы
+import "./AllOrdersPage.css"; 
+import API_BASE_URL from "../services/api";
+
 
 function AllOrdersPage({ products = [], statuses = [] }) {
   const [orders, setOrders] = useState([]);
@@ -12,7 +14,7 @@ function AllOrdersPage({ products = [], statuses = [] }) {
       try {
         const token = localStorage.getItem("token");
         const response = await axios.get(
-          "https://localhost:7000/api/Order/GetAllOrdersByUser",
+               `${API_BASE_URL}/Order/GetAllOrdersByUser`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -43,10 +45,19 @@ function AllOrdersPage({ products = [], statuses = [] }) {
       : { name: "Неизвестный продукт", image: "placeholder.jpg" };
   };
 
+  // Обновленная функция для преобразования статусов
   const getStatusNameById = (id) => {
     if (!statuses || statuses.length === 0) return "Неизвестный статус";
     const status = statuses.find((s) => s.Id === id);
-    return status ? status.Name : "Неизвестный статус";
+    
+    // Добавляем преобразование для нужных статусов
+    if (status) {
+      if (status.Name === "Pending") return "в обробці";
+      if (status.Name === "None") return "скасовано";
+      return status.Name;
+    }
+
+    return "Неизвестный статус";
   };
 
   return (

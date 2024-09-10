@@ -22,9 +22,6 @@ font-family: Jura;
   padding: 20px;
   box-sizing: border-box;
   background-color: #ffffff;
-  /* Белый фон для контейнера */
-  /* padding-left: 10%;
-  padding-right: 35%; */
 }
 
 
@@ -95,4 +92,11 @@ a:hover {
   justify-content:center;
   margin-left: 15%;
   /* Выровнять кнопку по правому краю */
+}
+
+.error-message {
+  color: red;
+  font-size: 0.9rem;
+  margin-bottom: 10px;
+  text-align: center;
 }

@@ -6,6 +6,7 @@ import UkrPost from "../components/assets/ukrPost.png";
 import Mag from "../components/assets/mag.png";
 import Box from "../components/assets/box.png";
 import "./OrderPage.css";
+import API_BASE_URL from "../services/api";
 
 const OrderPage = () => {
   const { selectedItems, clearCart, clearSelectedItems } = useCart();
@@ -53,10 +54,10 @@ const OrderPage = () => {
         try {
           const token = localStorage.getItem("token");
 
-          // Создайте заказы для всех товаров
+          // Create orders for all items
           const orderResponses = await Promise.all(
             selectedItems.map((item) =>
-              fetch("https://localhost:7000/api/Order/CreateOrder", {
+              fetch(`${API_BASE_URL}/Order/CreateOrder`, {
                 method: "POST",
                 headers: {
                   "Content-Type": "application/json",
@@ -72,7 +73,7 @@ const OrderPage = () => {
             )
           );
 
-          // Получите все ID созданных заказов
+          // Get all created order IDs
           const orderResults = await Promise.all(
             orderResponses.map((res) => res.json())
           );
@@ -81,32 +82,29 @@ const OrderPage = () => {
 
           const updateResponses = await Promise.all(
             selectedItems.map((item) =>
-              fetch(
-                `https://localhost:7000/api/Product/UpdateProductWithId${item.id}`,
-                {
-                  method: "PUT",
-                  headers: {
-                    "Content-Type": "application/json",
-                    Authorization: `Bearer ${token}`,
-                  },
-                  body: JSON.stringify({
-                    Id: item.id, // Id товара
-                    SubcathegoryId: item.SubcathegoryId,
-                    Name: item.name,
-                    CathegoryId: item.CathegoryId,
-                    Description: item.description,
-                    Price: item.price,
-                    Photos: item.photos || [],
-                    DiscountId: item.DiscountId,
-                    IsAvailable: false,
-                    CountryId: item.CountryId,
-                    BrandId: item.BrandId,
-                    GenderId: item.GenderId,
-                    SportId: item.SportId,
-                    ColorId: item.ColorId,
-                  }),
-                }
-              )
+              fetch(`${API_BASE_URL}/Product/UpdateProductWithId${item.id}`, {
+                method: "PUT",
+                headers: {
+                  "Content-Type": "application/json",
+                  Authorization: `Bearer ${token}`,
+                },
+                body: JSON.stringify({
+                  Id: item.id,
+                  SubcathegoryId: item.SubcathegoryId,
+                  Name: item.name,
+                  CathegoryId: item.CathegoryId,
+                  Description: item.description,
+                  Price: item.price,
+                  Photos: item.photos || [],
+                  DiscountId: item.DiscountId,
+                  IsAvailable: false,
+                  CountryId: item.CountryId,
+                  BrandId: item.BrandId,
+                  GenderId: item.GenderId,
+                  SportId: item.SportId,
+                  ColorId: item.ColorId,
+                }),
+              })
             )
           );
           const updateResults = await Promise.all(
@@ -116,7 +114,7 @@ const OrderPage = () => {
 
           const deliveryResponses = await Promise.all(
             orderResults.map((order) =>
-              fetch("https://localhost:7000/api/Delivery/CreateDelivery", {
+              fetch(`${API_BASE_URL}/Delivery/CreateDelivery`, {
                 method: "POST",
                 headers: {
                   "Content-Type": "application/json",
@@ -140,21 +138,21 @@ const OrderPage = () => {
 
           clearCart();
           clearSelectedItems();
-          setCurrentStep(4); // Переход к шагу 4
+          setCurrentStep(4); // Move to step 4
         } catch (error) {
           console.error("Error submitting order and delivery:", error);
         }
       } else {
-        handleNextStep(); // Переход к следующему шагу, если оплата при получении не выбрана
+        handleNextStep(); // Move to the next step if cash on delivery is not selected
       }
     } else if (currentStep === 3 && !isCashOnDelivery) {
       try {
         const token = localStorage.getItem("token");
 
-        // Создайте заказы для всех товаров
+        // Create orders for all items
         const orderResponses = await Promise.all(
           selectedItems.map((item) =>
-            fetch("https://localhost:7000/api/Order/CreateOrder", {
+            fetch(`${API_BASE_URL}/Order/CreateOrder`, {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
@@ -178,32 +176,29 @@ const OrderPage = () => {
 
         const updateResponses = await Promise.all(
           selectedItems.map((item) =>
-            fetch(
-              `https://localhost:7000/api/Product/UpdateProductWithId${item.id}`,
-              {
-                method: "PUT",
-                headers: {
-                  "Content-Type": "application/json",
-                  Authorization: `Bearer ${token}`,
-                },
-                body: JSON.stringify({
-                  Id: item.id, // Id товара
-                  SubcathegoryId: item.SubcathegoryId,
-                  Name: item.name,
-                  CathegoryId: item.CathegoryId,
-                  Description: item.description,
-                  Price: item.price,
-                  Photos: item.photos || [],
-                  DiscountId: item.DiscountId,
-                  IsAvailable: false,
-                  CountryId: item.CountryId,
-                  BrandId: item.BrandId,
-                  GenderId: item.GenderId,
-                  SportId: item.SportId,
-                  ColorId: item.ColorId,
-                }),
-              }
-            )
+            fetch(`${API_BASE_URL}/Product/UpdateProductWithId${item.id}`, {
+              method: "PUT",
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`,
+              },
+              body: JSON.stringify({
+                Id: item.id,
+                SubcathegoryId: item.SubcathegoryId,
+                Name: item.name,
+                CathegoryId: item.CathegoryId,
+                Description: item.description,
+                Price: item.price,
+                Photos: item.photos || [],
+                DiscountId: item.DiscountId,
+                IsAvailable: false,
+                CountryId: item.CountryId,
+                BrandId: item.BrandId,
+                GenderId: item.GenderId,
+                SportId: item.SportId,
+                ColorId: item.ColorId,
+              }),
+            })
           )
         );
         const updateResults = await Promise.all(
@@ -213,7 +208,7 @@ const OrderPage = () => {
 
         const deliveryResponses = await Promise.all(
           orderResults.map((order) =>
-            fetch("https://localhost:7000/api/Delivery/CreateDelivery", {
+            fetch(`${API_BASE_URL}/Delivery/CreateDelivery`, {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
@@ -238,7 +233,7 @@ const OrderPage = () => {
         clearCart();
         clearSelectedItems();
         console.log("clearCart:", selectedItems);
-        handleNextStep(); // Переход к следующему шагу
+        handleNextStep(); // Move to the next step
       } catch (error) {
         console.error("Error submitting order and delivery:", error);
       }

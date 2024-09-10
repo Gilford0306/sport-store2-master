@@ -1,23 +1,30 @@
-import React, { useState } from "react";
-import { useParams, useNavigate } from "react-router-dom"; // Используем useNavigate для навигации
+import React, { useState, useEffect } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 import { useProducts } from "../components/contexts/ProductContext";
 import { useFavorites } from "../components/contexts/FavoritesContext";
 import { useCart } from "../components/contexts/CartContext";
-import { useUser } from "../components/contexts/UserContext"; // Используем UserContext
+import { useUser } from "../components/contexts/UserContext";
 import RelatedProducts from "../components/RelatedProducts/RelatedProducts";
 import "./StorePage.css";
 import "./ProductPage.css";
 
 function ProductPage() {
   const { productId } = useParams();
-  const navigate = useNavigate(); // Инициализируем useNavigate
+  const navigate = useNavigate();
   const products = useProducts();
   const { addFavorite, isFavorite, removeFavorite } = useFavorites();
   const { cartItems, addToCart, removeFromCart } = useCart();
-  const { userProfile } = useUser(); // Получаем данные о пользователе из UserContext
+  const { userProfile } = useUser();
   const [selectedSize, setSelectedSize] = useState(null);
+  const [currentImage, setCurrentImage] = useState(null);
 
   const product = products.find((p) => p.id === parseInt(productId));
+
+  useEffect(() => {
+    if (product) {
+      setCurrentImage(product.image); 
+    }
+  }, [productId, product]); 
 
   if (!product) {
     return <div>Product not found</div>;
@@ -25,7 +32,7 @@ function ProductPage() {
 
   const handleFavoriteClick = () => {
     if (!userProfile) {
-      navigate("/login"); // Перенаправляем на страницу логина, если пользователь не авторизован
+      navigate("/login");
       return;
     }
 
@@ -38,7 +45,7 @@ function ProductPage() {
 
   const handleAddToCart = () => {
     if (!userProfile) {
-      navigate("/login"); // Перенаправляем на страницу логина, если пользователь не авторизован
+      navigate("/login");
       return;
     }
 
@@ -54,7 +61,22 @@ function ProductPage() {
     <div className="product-page-one">
       <div className="product-content">
         <div className="product-image-section">
-          <img src={product.image} alt={product.name} />
+          <img
+            src={currentImage}
+            alt={product.name}
+            className="main-image"
+          />
+          <div className="additional-images">
+            {product.images.slice(0, 5).map((img, index) => (
+              <img
+                key={index}
+                src={img}
+                alt={`Additional ${index + 1}`}
+                className="additional-image"
+                onClick={() => setCurrentImage(img)}
+              />
+            ))}
+          </div>
         </div>
         <div className="product-details-section">
           <h1>{product.name}</h1>

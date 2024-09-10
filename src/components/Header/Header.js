@@ -10,7 +10,7 @@ import { useFavorites } from "../contexts/FavoritesContext";
 import { useCart } from "../contexts/CartContext";
 
 const Header = () => {
-  const { userProfile, logout } = useContext(UserContext);
+  const { userProfile, userPhoto, logout } = useContext(UserContext); 
   const { clearFavorites } = useFavorites();
   const { clearCart } = useCart();
   const navigate = useNavigate();
@@ -18,10 +18,10 @@ const Header = () => {
   const handleLogout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("refreshToken");
-    clearFavorites(); // Очищаем избранные товары
-    clearCart(); // Очищаем корзину
-    logout(); // Выполняем логаут
-    navigate("/login"); // Перенаправляем на страницу входа
+    clearFavorites(); 
+    clearCart(); 
+    logout(); 
+    navigate("/login"); 
   };
 
   const handleIconClick = (path) => {
@@ -33,7 +33,7 @@ const Header = () => {
   };
 
   const handleLogoClick = () => {
-    navigate("/"); // Перенаправляем на главную страницу
+    navigate("/"); 
   };
 
   return (
@@ -53,7 +53,7 @@ const Header = () => {
               />
             </div>
             <div className="user-profile" onClick={handleProfileClick}>
-              <img src={group165} alt="User" className="profile-img" />
+              <img src={userPhoto || group165} alt="User" className="profile-img" />
               <span className="user-name">
                 {userProfile.lastName || "User"}
               </span>

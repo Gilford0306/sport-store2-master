@@ -6,7 +6,6 @@ function BestSellers() {
     <section className="best-sellers">
       <h2>ХІТ ПРОДАЖУ</h2>
       <div className="products">
-        {/* Карточки товаров */}
         <div className="product-card">
           <img src="path/to/product1.jpg" alt="Product 1" />
           <button>Детальніше</button>
@@ -15,7 +14,6 @@ function BestSellers() {
           <img src="path/to/product2.jpg" alt="Product 2" />
           <button>Детальніше</button>
         </div>
-        {/* Добавить столько карточек, сколько нужно */}
       </div>
     </section>
   );

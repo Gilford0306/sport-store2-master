@@ -3,19 +3,22 @@ import "./LoginPage.css";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../components/contexts/UserContext";
 import { useFavorites } from "../components/contexts/FavoritesContext";
+import API_BASE_URL from "../services/api";
 
 function LoginPage() {
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState(""); // Новое состояние для сообщения об ошибке
   const navigate = useNavigate();
   const { login: loginContext } = useContext(UserContext);
   const { setUser } = useFavorites();
 
   const handleLogin = async (event) => {
     event.preventDefault();
+    setErrorMessage(""); // Очистить сообщение об ошибке перед новой попыткой
 
     try {
-      const response = await fetch("https://localhost:7000/api/Auth/login", {
+      const response = await fetch( `${API_BASE_URL}/Auth/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -26,7 +29,8 @@ function LoginPage() {
       if (!response.ok) {
         const errorData = await response.json();
         console.error("Login error:", errorData);
-        throw new Error(errorData.message || "Something went wrong");
+        setErrorMessage("Невірний логін або пароль"); // Устанавливаем сообщение об ошибке
+        return; // Останавливаем выполнение, если запрос не удался
       }
 
       const data = await response.json();
@@ -35,7 +39,7 @@ function LoginPage() {
 
       // Получаем профиль пользователя
       const profileResponse = await fetch(
-        "https://localhost:7000/api/Auth/GetProfile",
+        `${API_BASE_URL}/Auth/GetProfile`,
         {
           method: "GET",
           headers: {
@@ -47,7 +51,8 @@ function LoginPage() {
       if (!profileResponse.ok) {
         const errorProfileData = await profileResponse.json();
         console.error("Failed to fetch profile:", errorProfileData);
-        throw new Error("Failed to fetch profile");
+        setErrorMessage("Не вдалося отримати профіль користувача");
+        return;
       }
 
       const profileData = await profileResponse.json();
@@ -60,6 +65,7 @@ function LoginPage() {
       navigate("/");
     } catch (error) {
       console.error("Login failed:", error);
+      setErrorMessage("Помилка при вході"); // Обработка ошибки при запросе
     }
   };
 
@@ -87,6 +93,9 @@ function LoginPage() {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
+
+        {errorMessage && <p className="error-message">{errorMessage}</p>} 
+
         <div className="button-container">
           <button type="submit" className="continue-button">
             Продовжити

@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { HashRouter  as Router, Route, Routes } from "react-router-dom";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 import HomePage from "./pages/HomePage";
 import ProductPage from "./pages/ProductPage";
 import CartPage from "./pages/CartPage";
 import FavoritesPage from "./pages/FavoritesPage";
-import CheckoutPage from "./pages/CheckoutPage";
 import UserProfilePage from "./pages/UserProfilePage";
 import LoginPage from "./pages/LoginPage";
 import SignupPage from "./pages/SignupPage";
@@ -24,6 +23,7 @@ import { CartProvider } from "./components/contexts/CartContext";
 import { UserProvider } from "./components/contexts/UserContext";
 import { ProductProvider } from "./components/contexts/ProductContext";
 import { FavoritesProvider } from "./components/contexts/FavoritesContext";
+import API_BASE_URL from "../src/services/api";
 
 import "./styles/global.css";
 
@@ -40,21 +40,21 @@ function App() {
     const fetchData = async () => {
       try {
         const statusesResponse = await fetch(
-          "https://localhost:7000/api/Order/GetAllStatuses"
+           `${API_BASE_URL}/Order/GetAllStatuses`
         );
         const statusesData = await statusesResponse.json();
         setStatuses(statusesData);
         console.log(statusesData);
 
         const brandsResponse = await fetch(
-          "https://localhost:7000/api/Product/GetAllItemsFromUniversalClass?classtype=Brand"
+           `${API_BASE_URL}/Product/GetAllItemsFromUniversalClass?classtype=Brand`
         );
         const brandsData = await brandsResponse.json();
         setBrands(brandsData);
 
         // Получаем все цвета
         const colorsResponse = await fetch(
-          "https://localhost:7000/api/Product/GetAllItemsFromUniversalClass?classtype=Color"
+          `${API_BASE_URL}/Product/GetAllItemsFromUniversalClass?classtype=Color`
         );
         const colorsData = await colorsResponse.json();
         setColors(colorsData.Value);
@@ -62,14 +62,14 @@ function App() {
 
         // Получаем все категории
         const cathegoriesResponse = await fetch(
-          "https://localhost:7000/api/Product/GetAllItemsFromUniversalClass?classtype=Cathegory"
+          `${API_BASE_URL}/Product/GetAllItemsFromUniversalClass?classtype=Cathegory`
         );
         const cathegoriesData = await cathegoriesResponse.json();
         setCathegories(cathegoriesData);
 
         // Получаем все субкатегории
         const subcathegoriesResponse = await fetch(
-          "https://localhost:7000/api/Product/GetAllSubcathegories"
+          `${API_BASE_URL}/Product/GetAllSubcathegories`
         );
         const subcathegoriesData = await subcathegoriesResponse.json();
         setSubcathegories(subcathegoriesData);
@@ -77,7 +77,7 @@ function App() {
 
         // Получаем все виды спорта
         const sportsResponse = await fetch(
-          "https://localhost:7000/api/Product/GetAllItemsFromUniversalClass?classtype=Sport"
+          `${API_BASE_URL}/Product/GetAllItemsFromUniversalClass?classtype=Sport`
         );
         const sportsData = await sportsResponse.json();
         setSports(sportsData);
@@ -85,7 +85,7 @@ function App() {
 
         // Получаем все гендеры
         const gendersResponse = await fetch(
-          "https://localhost:7000/api/Product/GetAllItemsFromUniversalClass?classtype=Gender"
+          `${API_BASE_URL}/Product/GetAllItemsFromUniversalClass?classtype=Gender`
         );
         const genderssData = await gendersResponse.json();
         setSports(genderssData);
@@ -93,7 +93,8 @@ function App() {
 
         // Получаем все продукты
         const productsResponse = await fetch(
-          "https://localhost:7000/api/Product/GetAllProducts"
+
+              `${API_BASE_URL}/Product/GetAllProducts`
         );
         const productsData = await productsResponse.json();
         console.log("productsData - ", productsData.Value);
@@ -102,13 +103,14 @@ function App() {
         const productsWithPhotos = await Promise.all(
           productsData.map(async (product) => {
             const photosResponse = await fetch(
-              `https://localhost:7000/api/Product/GetPhotosByProductId${product.Id}`
+                `${API_BASE_URL}/Product/GetPhotosByProductId${product.Id}`
             );
             const photosData = await photosResponse.json();
             return {
               ...product,
               image:
                 photosData.length > 0 ? photosData[0].URL : "placeholder.jpg",
+              images: photosData.map(photo => photo.URL),
               isAvailable: product.IsAvailable,
             };
           })
@@ -132,6 +134,7 @@ function App() {
             description: product.Description,
             price: product.Price,
             image: product.image,
+            images: product.images,
             full_description: product.Description,
             category: category ? category.Name : "Unknown",
             subcategory: subcategory ? subcategory.Name : "Unknown",
@@ -175,7 +178,6 @@ function App() {
                       <Route path="/" element={<HomePage />} />
                       <Route path="/cart" element={<CartPage />} />
                       <Route path="/favorite" element={<FavoritesPage />} />
-                      <Route path="/checkout" element={<CheckoutPage />} />
                       <Route path="/profile" element={<UserProfilePage />} />
                       <Route path="/login" element={<LoginPage />} />
                       <Route path="/signup" element={<SignupPage />} />

@@ -1,18 +1,12 @@
 import React from "react";
-import HeroSection from "../components/Home/HeroSection";
-import ProductCategories from "../components/Home/ProductCategories";
-import BestSellers from "../components/Home/BestSellers";
-import Header from "../components/Header/Header";
-import NavigationBar from "../components/NavigationBar/NavigationBar";
-import Button from "../components/Button/Button";
 import heroImage from "../components/assets/hero-image-copy.jpg";
 import "./HomePage.css";
 import magtop1 from "../components/assets/Frame 80.svg";
 import magtop2 from "../components/assets/Frame 81.svg";
 import magtop3 from "../components/assets/Frame 82.svg";
-import clothingImage from "../components/assets/Clothing.jpg"; // путь к изображению одежды
-import footwearImage from "../components/assets/Footwear.jpg"; // путь к изображению обуви
-import accessoriesImage from "../components/assets/Accessories.jpg"; // путь к изображению аксессуаров
+import clothingImage from "../components/assets/Clothing.jpg"; 
+import footwearImage from "../components/assets/Footwear.jpg"; 
+import accessoriesImage from "../components/assets/Accessories.jpg"; 
 import Frame1 from "../components/assets/store/Frame1.png";
 import Frame2 from "../components/assets/store/Frame2.png";
 import Frame3 from "../components/assets/store/Frame3.png";

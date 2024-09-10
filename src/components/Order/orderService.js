@@ -1,7 +1,10 @@
+import API_BASE_URL from "../../services/api";
+
+
 export const getAllOrders = async (token) => {
   try {
     const response = await fetch(
-      "https://localhost:7000/api/Order/GetAllOrders",
+      `${API_BASE_URL}/Order/GetAllOrders`,
       {
         method: "GET",
         headers: {
@@ -31,7 +34,7 @@ export const getAllOrders = async (token) => {
 export const getOrderById = async (id, token) => {
   try {
     const response = await fetch(
-      `https://localhost:7000/api/Order/GetOrderById${id}`,
+     `${API_BASE_URL}/Order/GetOrderById${id}`,
       {
         method: "GET",
         headers: {
@@ -60,7 +63,7 @@ export const getOrderById = async (id, token) => {
 export const createOrder = async (orderData, token) => {
   try {
     const response = await fetch(
-      "https://localhost:7000/api/Order/CreateOrder",
+     `${API_BASE_URL}/Order/CreateOrder`,
       {
         method: "POST",
         headers: {
@@ -86,7 +89,7 @@ export const createOrder = async (orderData, token) => {
 export const updateOrder = async (orderData, token) => {
   try {
     const response = await fetch(
-      "https://localhost:7000/api/Order/UpdateOrder",
+    `${API_BASE_URL}/Order/UpdateOrder`,
       {
         method: "POST",
         headers: {
@@ -112,7 +115,7 @@ export const updateOrder = async (orderData, token) => {
 export const changeOrderStatus = async (orderId, statusId, token) => {
   try {
     const response = await fetch(
-      `https://localhost:7000/api/Order/ChangeStatusOrderWithId${orderId}&${statusId}`,
+     `${API_BASE_URL}/Order/ChangeStatusOrderWithId${orderId}&${statusId}`,
       {
         method: "POST",
         headers: {
@@ -136,7 +139,7 @@ export const changeOrderStatus = async (orderId, statusId, token) => {
 export const getAllStatuses = async (token) => {
   try {
     const response = await fetch(
-      "https://localhost:7000/api/Order/GetAllStatuses",
+     `${API_BASE_URL}/Order/GetAllStatuses`,
       {
         method: "GET",
         headers: {

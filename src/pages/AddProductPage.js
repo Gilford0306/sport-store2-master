@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./AddProductPage.css"; 
+import API_BASE_URL from "../services/api";
+
 
 const AddProductPage = () => {
   const [categories, setCategories] = useState([]);
@@ -27,30 +29,30 @@ const AddProductPage = () => {
   useEffect(() => {
     axios
       .get(
-        "https://localhost:7000/api/Product/GetAllItemsFromUniversalClass?classtype=Cathegory"
+        `${API_BASE_URL}/Product/GetAllItemsFromUniversalClass?classtype=Cathegory`
       )
       .then((response) => setCategories(response.data));
     axios
-      .get("https://localhost:7000/api/Product/GetAllSubcathegories")
+      .get( `${API_BASE_URL}/Product/GetAllSubcathegories`)
       .then((response) => setSubcategories(response.data));
     axios
       .get(
-        "https://localhost:7000/api/Product/GetAllItemsFromUniversalClass?classtype=Brand"
+         `${API_BASE_URL}/Product/GetAllItemsFromUniversalClass?classtype=Brand`
       )
       .then((response) => setBrands(response.data));
     axios
       .get(
-        "https://localhost:7000/api/Product/GetAllItemsFromUniversalClass?classtype=Color"
+         `${API_BASE_URL}/Product/GetAllItemsFromUniversalClass?classtype=Color`
       )
       .then((response) => setColors(response.data));
     axios
       .get(
-        "https://localhost:7000/api/Product/GetAllItemsFromUniversalClass?classtype=Gender"
+         `${API_BASE_URL}/Product/GetAllItemsFromUniversalClass?classtype=Gender`
       )
       .then((response) => setGenders(response.data));
     axios
       .get(
-        "https://localhost:7000/api/Product/GetAllItemsFromUniversalClass?classtype=Sport"
+         `${API_BASE_URL}/Product/GetAllItemsFromUniversalClass?classtype=Sport`
       )
       .then((response) => setSports(response.data));
   }, []);
@@ -85,7 +87,7 @@ const handleSubmit = (e) => {
   };
 
   axios
-    .post("https://localhost:7000/api/Product/AddNewProduct", productData, {
+    .post( `${API_BASE_URL}/Product/AddNewProduct`, productData, {
       headers: {
         Authorization: `Bearer ${token}`, 
       },

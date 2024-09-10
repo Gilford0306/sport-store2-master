@@ -6,7 +6,7 @@ import DeafaultPhoto from "../components/assets/Ellipse9.png";
 import { useNavigate } from "react-router-dom";
 
 function UserProfilePage() {
-  const { userProfile, loadUserProfile, userRole } = useContext(UserContext);
+  const { userProfile, loadUserProfile, userPhoto, userRole } = useContext(UserContext);
   const [profileData, setProfileData] = useState(userProfile || {});
   const [isEditing, setIsEditing] = useState(false);
   const [newColor, setNewColor] = useState("");
@@ -85,6 +85,33 @@ function UserProfilePage() {
     }
   };
 
+
+const handlePhotoChange = async (e) => {
+  const file = e.target.files[0];
+  if (file) {
+    const formData = new FormData();
+    formData.append("file", file);
+
+    try {
+      const token = localStorage.getItem("token");
+      const response = await axios.post(
+        "https://localhost:7000/api/Auth/UpdateProfilePhoto",
+        formData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+      console.log(response.data);
+      loadUserProfile(); // Обновление профиля после загрузки фото
+    } catch (error) {
+      console.error("Ошибка загрузки фото", error);
+    }
+  }
+};
+
   return (
     <div className="profile-form">
       {/* Existing profile form code */}
@@ -137,12 +164,20 @@ function UserProfilePage() {
           />
         </div>
       </div>
-      <div className="form-center">
-        <div className="photo-upload">
-          <img src={DeafaultPhoto} alt="profile" />
-          <button className="save-button">Змінити фото</button>
-        </div>
-      </div>
+  <div className="form-center">
+    <div className="photo-upload">
+      <img src={userPhoto || DeafaultPhoto} alt="User" className="profile-img" />
+      <input
+        type="file"
+        id="photo-upload"
+        style={{ display: "none" }}
+        onChange={handlePhotoChange}
+      />
+      <label htmlFor="photo-upload" className="save-button">
+        Змінити фото
+      </label>
+    </div>
+  </div>
       <div className="form-save">
         {isEditing ? (
           <button className="save-button" onClick={handleSave}>

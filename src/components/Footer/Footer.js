@@ -10,16 +10,16 @@ function Footer() {
           <h3>РЕСУРСИ</h3>
           <ul>
             <li>
-              <a href="/gift">Подарункові картки</a>
+              <a href="/sport-store2-master/#/gift">Подарункові картки</a>
             </li>
             <li>
-              <a href="/map">Знайти магазин</a>
+              <a href="/sport-store2-master/#/map">Знайти магазин</a>
             </li>
             <li>
-              <a href="/login">Стати учасником</a>
+              <a href="/sport-store2-master/#/login">Стати учасником</a>
             </li>
             <li>
-              <a href="/help">Зворотний зв'язок сайту</a>
+              <a href="/sport-store2-master/#/help">Зворотний зв'язок сайту</a>
             </li>
           </ul>
         </div>
@@ -27,7 +27,7 @@ function Footer() {
           <h3>ДОПОМОГА</h3>
           <ul>
             <li>
-              <a href="/help">Отримати допомогу</a>
+              <a href="/sport-store2-master/#/help">Отримати допомогу</a>
             </li>
             <li>
               <a href="#">Статус замовлення</a>
@@ -48,7 +48,7 @@ function Footer() {
               <a href="#">Баланс подарункової картки</a>
             </li>
             <li>
-              <a href="/help#">Зв'язатися з нами</a>
+              <a href="/sport-store2-master/#/help#">Зв'язатися з нами</a>
             </li>
           </ul>
         </div>
@@ -113,10 +113,10 @@ function Footer() {
             <a href="#">Умови продажу</a>
           </li>
           <li>
-            <a href="/terms-of-uses">Умови використання </a>
+            <a href="/sport-store2-master/#/terms-of-uses">Умови використання</a>
           </li>
           <li>
-            <a href="/privacy-policy">Політика конфіденційності</a>
+            <a href="/sport-store2-master/#/privacy-policy">Політика конфіденційності</a>
           </li>
           <li>
             <a href="#">Ваш вибір конфіденційності </a>
