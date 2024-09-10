@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/sport-store2-master/static/css/main.c7359b26.css",
-    "main.js": "/sport-store2-master/static/js/main.b6e994a5.js",
+    "main.js": "/sport-store2-master/static/js/main.96517234.js",
     "static/media/Frame 80.svg": "/sport-store2-master/static/media/Frame 80.e2b38e196dab763a2f9d77f8203a7e10.svg",
     "static/media/Frame 82.svg": "/sport-store2-master/static/media/Frame 82.77f0609417977a9e059a38f6a0fc8822.svg",
     "static/media/Frame 81.svg": "/sport-store2-master/static/media/Frame 81.66bc37954bf0f769738110c94070fb8e.svg",
@@ -31,10 +31,10 @@
     "static/media/fa-v4compatibility.woff2": "/sport-store2-master/static/media/fa-v4compatibility.6cfec8414be20e2c3426.woff2",
     "index.html": "/sport-store2-master/index.html",
     "main.c7359b26.css.map": "/sport-store2-master/static/css/main.c7359b26.css.map",
-    "main.b6e994a5.js.map": "/sport-store2-master/static/js/main.b6e994a5.js.map"
+    "main.96517234.js.map": "/sport-store2-master/static/js/main.96517234.js.map"
   },
   "entrypoints": [
     "static/css/main.c7359b26.css",
-    "static/js/main.b6e994a5.js"
+    "static/js/main.96517234.js"
   ]
 }
