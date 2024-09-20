@@ -38,6 +38,7 @@ function App() {
 
   useEffect(() => {
     const fetchData = async () => {
+      
       try {
         const statusesResponse = await fetch(
            `${API_BASE_URL}/Order/GetAllStatuses`
